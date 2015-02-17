@@ -7,3 +7,6 @@ COOOOOOL!!!!!!
 \n
 What's the difference? 
 Difference if cloud computing sounds good
+
+
+What is the difference between clone and fork?
