@@ -1,0 +1,45 @@
+//把整个folder和jar包们传进去
+ scp -i 15619_prime.pem -r java ec2-user@ec2-54-152-149-53.compute-1.amazonaws.com:~
+
+//安装 javaC
+sudo yum install java-devel
+
+
+//url request example
+ ec2-54-152-21-195.compute-1.amazonaws.com/q1?key=306063896731552281713201727176392168770237379582172677299123272033941091616817696059536783089054693601&message=URYEXYBJB
+
+//编绎java代码
+ javac -cp "undertow-core-1.1.1.Final.jar:jboss-logging-3.2.1.Final.jar:xnio-nio-3.3.0.Final.jar:xnio-api-3.3.0.Final.jar" Q1.java 
+
+//跑java代码
+ java -cp "undertow-core-1.1.1.Final.jar:jboss-logging-3.2.1.Final.jar:xnio-nio-3.3.0.Final.jar:xnio-api-3.3.0.Final.jar:." Q1 ec2-54-152-21-195.compute-1.amazonaws.com
+
+
+//更新java文件
+  scp -i 15619_prime.pem -r java/Q1.java ec2-user@ec2-54-152-21-195.compute-1.amazonaws.com:~/java/Q1.java 
+
+
+m3large:  ec2-54-152-149-53.compute-1.amazonaws.com
+scp -i 15619_prime.pem -r java/Q1.java ec2-user@ec2-54-152-149-53.compute-1.amazonaws.com:~/java/Q1.java 
+
+
+
+
+second m1large:
+
+ec2-54-152-154-208.compute-1.amazonaws.com
+
+ scp -i 15619_prime.pem -r java ec2-user@ec2-54-152-154-208.compute-1.amazonaws.com:~
+
+run java:
+
+ java -cp "undertow-core-1.1.1.Final.jar:jboss-logging-3.2.1.Final.jar:xnio-nio-3.3.0.Final.jar:xnio-api-3.3.0.Final.jar:." Q1 ec2-54-152-154-208.compute-1.amazonaws.com
+
+
+
+kill Process:
+kill <pid>
+
+find pid:
+ lsof -i:<port>
+
