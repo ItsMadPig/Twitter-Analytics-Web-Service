@@ -1,6 +1,6 @@
 /*
-15619 Project
-Team Oak
+15619 Project Phase1
+Team Oak: Ziyuan Song, Aaron Hsu, Jiali Chen
 */
 import io.undertow.Undertow;
 import io.undertow.server.HttpHandler;
@@ -118,7 +118,7 @@ public class Q1 {
 									.println("Waiting for another correct url request");
 							exchange.getResponseHeaders().put(Headers.CONTENT_TYPE,
 									"text/plain");
-							exchange.getResponseSender().send("Songziyuan 250.");
+							exchange.getResponseSender().send("I got your request :D");
 							
 						}
 					}
