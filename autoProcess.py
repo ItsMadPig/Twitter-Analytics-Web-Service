@@ -1,5 +1,19 @@
 #!/usr/bin/env python
 
+
+###############################
+##variables
+###############################
+#AMI ID for front end servers
+FEAMI = "ami-7c0a4614" #for front end change!
+INSTTYPE = "m1.large" #for front end change!
+KEYNAME = '15319demo' #for sshing change!
+SUBNETID = "subnet-95b465be"
+
+SECURITYGROUPNAME = "http_script"
+SECURITYGROUPDESC = "http_via_script"
+
+
 ###########################################
 ##Code by Aaron Hsu ahsu1@andrew.cmu.edu
 ##########################################
@@ -24,17 +38,27 @@ ELB = boto.ec2.elb.connect_to_region("us-east-1")
 AUTOSCALE = boto.ec2.autoscale.connect_to_region("us-east-1")
 CLOUDWATCH = boto.ec2.cloudwatch.connect_to_region('us-east-1')
 
+
+
+
+###############################
+##variables
+###############################
+#AMI ID for front end servers
+FEAMI = "ami-7c0a4614" #for front end
+INSTTYPE = "m1.large" #for front end
+KEYNAME = '15319demo' #for sshing
+SUBNETID = "subnet-95b465be"
+
+SECURITYGROUPNAME = "http_script"
+SECURITYGROUPDESC = "http_via_script"
+
 ###########################
 ####constants
 ###########################
-SECURITYGROUPNAME = "http_script"
-SECURITYGROUPDESC = "http_via_script"
-KEYNAME = '15319demo'
 REGION = 'us-east-1a'
-SUBNETID = "subnet-95b465be"
-INSTTYPE = "m3.medium"
-INTOK = 16
 
+INTOK = 16
 INTTERMINATED = 48
 
 LBPORT = [(80, 80, 'http')]
@@ -46,16 +70,12 @@ HCHEALTHY = 3
 HCTIMEOUT = 5
 
 CONF_NAME = "launch_conf"
-#AMI ID for front end servers
-FEAMI = "ami-7c0a4614"
 
 SG_NAME = "scale_group"
-MIN_SIZE = 0
-MAX_SIZE = 0
+MIN_SIZE = 1
+MAX_SIZE = 1
 HCPERIOD = "120"
 SG_CD = 120
-
-LOADGENURL = "ec2-52-0-242-81.compute-1.amazonaws.com"
 
 
 
@@ -150,7 +170,7 @@ def createLoadBalancer():
 ######################################################
 def createScalingGroup(input_lc):
 	print "creating scaling group"
-	tag = Tag(key="Project",value="2.2",propagate_at_launch=True,resource_id=SG_NAME)
+	tag = Tag(key="15619project",value="phase1",propagate_at_launch=True,resource_id=SG_NAME)
 	ag = AutoScalingGroup(name=SG_NAME, load_balancers=[LBNAME],
                           availability_zones=['us-east-1a'],
                           launch_config=input_lc, min_size=MIN_SIZE, max_size=MAX_SIZE,
@@ -161,8 +181,6 @@ def createScalingGroup(input_lc):
 
 	AUTOSCALE.create_auto_scaling_group(ag)
 	time.sleep(10)
-	AUTOSCALE.set_desired_capacity(SG_NAME, 5, honor_cooldown=False)
-	time.sleep(20)
 	return ag
 
 ######################################################
@@ -190,23 +208,39 @@ def createLaunchConfiguration():
 	time.sleep(10)
 	return lc
 
+#################
+##not used yet
+#################
+def terminateAllProcesses(ag,lc,lb):
+	print "test ended, terminating.."
+	ag.shutdown_instances()
+	time.sleep(30)
+	ag.delete()
+	lc.delete()
+	lb.delete()
+
+
 def main():
+
 	createSecurityGroup(0,65535)
 	lb = createLoadBalancer()
 	lc = createLaunchConfiguration()
 	ag = createScalingGroup(lc)
 	print "all created"
+	
+	#information on environment
 	lb = ELB.get_all_load_balancers(load_balancer_names=[LBNAME])[0]
 	group = AUTOSCALE.get_all_groups(names=[SG_NAME])[0]
-
 	instance_ids = [i.instance_id for i in group.instances]
 	reservations = CONN.get_all_instances(instance_ids)
 	instances = [i for r in reservations for i in r.instances]
 	print "\n---------------------------" 
 	print "RESULTS:"
 	print "loadbalancer.dns_name= ",lb.dns_name,"name",LBNAME
+	print "autoscalegroup.name= ",SG_NAME, "autoscale", group
 	for i in instances:
 		print  "instance.id= ", i.id, ",dns_name= ",i.public_dns_name,",private_ip= ",i.private_ip_address
 	print ""
+	
 
 main()
