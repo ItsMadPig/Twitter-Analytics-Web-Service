@@ -104,8 +104,8 @@ public class Q1 {
 		return chsI;
 	}
 
-	public void start(String host) {
-		Undertow server = Undertow.builder().addHttpListener(80, host)
+	public void start() {
+		Undertow server = Undertow.builder().addHttpListener(80, "0.0.0.0")
 				.setHandler(new HttpHandler() {
 
 					public void handleRequest(final HttpServerExchange exchange)
@@ -171,11 +171,7 @@ public class Q1 {
 
 	public static void main(String[] args) {
 		Q1 q1 = new Q1();
-		if (args.length > 0 && args[0].length() > 0)
-			q1.start(args[0]);
-		else
-			System.out.println("Please input : java Q1 <Your EC2 DNS name>");
-
+		q1.start();
 	}
 
 }
