@@ -2,6 +2,6 @@
 
 main(){
 sudo apt-get -y update
-sudo apt-get install mysql-server
+sudo apt-get -y install mysql-server
 }
 main
