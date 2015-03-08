@@ -1,11 +1,13 @@
 # 15619_Project
 15619 cloud computing team project
 
-能不能把名字从15619_project 改为 cloud computing project?
+startInstances.py- creates a ELB and front end servers
+FEexec/initiateFrontEnd - apt-get install java
+replace crontab with /etc/init.d/crontab
+create image id -> instance AMI
 
-\n
-What's the difference? 
-Difference if cloud computing sounds good
+FEexec/startFEserver - when reboot or startup, auto started by crontab
 
+phase1/q1/Q1.java - front end code
 
-What is the difference between clone and fork? Resolved
+phase2
