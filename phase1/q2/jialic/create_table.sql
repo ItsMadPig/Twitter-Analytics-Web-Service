@@ -15,11 +15,7 @@ CREATE TABLE `twitter`
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
-<<<<<<< Updated upstream
-ALTER DATABASE `mysqltwitter` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-=======
  ALTER DATABASE `mysqltwitter` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
->>>>>>> Stashed changes
 LOAD DATA LOCAL  INFILE '/Users/Scarlett/Desktop/eBusiness/15619/619Project/Phrase1/q2/db_1000_0.txt' INTO TABLE twitter FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\0\n';
 
 
