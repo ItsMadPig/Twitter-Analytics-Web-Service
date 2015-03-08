@@ -21,7 +21,7 @@ public class Q2 {
 		try {
 			String jdbcDriverName = "com.mysql.jdbc.Driver";
 			//Put DNS address of mysql here
-			String jdbcURL = "jdbc:mysql:///mysqltwitter";
+			String jdbcURL = "jdbc:mysql://localhost/mysqltwitter";
 
 			twitterDAO = new TwitterDAO(jdbcDriverName, jdbcURL, "twitter");
 			
@@ -50,7 +50,6 @@ public class Q2 {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-
 	}
 
 	/*
