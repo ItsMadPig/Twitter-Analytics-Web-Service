@@ -1,0 +1,10 @@
+sudo yum update
+sudo yum install mysql
+sudo yum install mysql-server
+sudo yum install mysql-devel
+sudo service mysqld start
+mysql -u root
+create database mysqltwitter;
+source create_table.sql;
+GRANT ALL PRIVILEGES ON *.* TO ''@'128.237.189.93' with grant option;
+
