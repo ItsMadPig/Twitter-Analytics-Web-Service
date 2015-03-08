@@ -54,6 +54,7 @@ public class TwitterDAO {
                 bean.setTweetid(rs.getString("tweetid"));
                 bean.setScore(rs.getInt("score"));
                 bean.setCensoredtext(rs.getString("censoredtext"));
+               
             	list.add(bean);
             }
         	

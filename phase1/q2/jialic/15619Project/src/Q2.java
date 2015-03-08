@@ -22,6 +22,10 @@ public class Q2 {
 			String jdbcDriverName = "com.mysql.jdbc.Driver";
 			//Put DNS address of mysql here
 			String jdbcURL = "jdbc:mysql:///mysqltwitter";
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 			twitterDAO = new TwitterDAO(jdbcDriverName, jdbcURL, "twitter");
 			
 		} catch (Exception e) {
@@ -39,7 +43,6 @@ public class Q2 {
 			String userId = paras.get("userid").getFirst();
 
 			String tweetTime = paras.get("tweet_time").getFirst();
-			System.out.println("  time-> "+tweetTime);
 
 			String response = getResponse(userId, tweetTime);
 
@@ -80,7 +83,7 @@ public class Q2 {
 				response.append(tweet.getTweetid()+":"+tweet.getScore()+":"+tweet.getCensoredtext()+"\n");
 			}
 		}
-		//System.out.println("response: "+response);
+		System.out.println("response: "+response);
 		return response.toString();
 	}
 
