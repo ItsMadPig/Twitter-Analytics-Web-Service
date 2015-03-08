@@ -16,6 +16,6 @@ CREATE TABLE `twitter`
 
 
  ALTER DATABASE `mysqltwitter` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-LOAD DATA LOCAL  INFILE '/Users/Scarlett/Desktop/eBusiness/15619/619Project/Phrase1/q2/db_1000_0.txt' INTO TABLE twitter FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\0\n';
+LOAD DATA LOCAL  INFILE '/Users/Scarlett/Desktop/eBusiness/15619/619Project/Phrase1/q2/db_1000' INTO TABLE twitter FIELDS TERMINATED BY '::|||' LINES TERMINATED BY '::::|||\n';
 
 
