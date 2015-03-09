@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 import io.undertow.Undertow;
 import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
@@ -19,8 +21,18 @@ public class Test {
 						}
 						else 
 						 if (requestPath.equals("/q2")) {
-							 Q2 q2 = new Q2();
+							 if(args.length<1 || args[0]=="")
+							    {
+							        System.out.println("Proper Usage is: java Test <DNS name of mysql server>");
+							        System.exit(0);
+							    }
+							 long startTime = System.currentTimeMillis();
+							 System.out.println(Arrays.toString(args));
+							 Q2 q2 = new Q2(args[0]);
 							 q2.processRequest(exchange);
+							 long endTime   = System.currentTimeMillis();
+							 long totalTime = endTime - startTime;
+							 System.out.println("runtime: "+totalTime);
 							 
 						 }
 						 else
