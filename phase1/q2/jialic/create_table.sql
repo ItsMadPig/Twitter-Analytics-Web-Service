@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS `twitter`;
 CREATE TABLE `twitter` 
   (
   `tweetid` varchar(19) NOT NULL,
-  `userid` text,
+  `userid` varchar(19),
   `time` text,
   `text` text,
   `score` int(11) DEFAULT NULL,
@@ -16,6 +16,6 @@ CREATE TABLE `twitter`
 
 
  ALTER DATABASE `mysqltwitter` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-LOAD DATA LOCAL  INFILE '/home/ubuntu/rawdata' INTO TABLE twitter FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\0\n';
+LOAD DATA LOCAL  INFILE '/home/ec2-user/rawdata' INTO TABLE twitter FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\0\n';
 
 
