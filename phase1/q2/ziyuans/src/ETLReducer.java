@@ -1,33 +1,46 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+
 import org.apache.commons.lang3.StringEscapeUtils;
 public class ETLReducer {
 	public static void main (String args[]) {
 		try {
-			BufferedReader br = new BufferedReader(new InputStreamReader(System.in,"UTF-8"));
+			
+			System.out.println(System.getProperty("file.encoding"));
+			System.setProperty("file.encoding","ANSI_X3.4-1968");
+			System.out.println(System.getProperty("file.encoding"));
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
 			String input;
-			String tweetId;
-			String oldtweetId = null;
 			while ((input=br.readLine())!=null) {
-				System.out.println(StringEscapeUtils.unescapeJson(input));
-				//String[] parts = input.split("\t");
-				//tweetId = parts[0];
+				System.out.println(StringEscapeUtils.unescapeJava(input));
+				//System.out.println(encodeUTF8(StringEscapeUtils.unescapeJava(input)));
 				/*
-				if (tweetId != null && tweetId.equals(oldtweetId)) {
-					continue;
-				} else {
-					//System.out.println(input);
-					System.out.println(json2plain(input));
-					oldtweetId = tweetId;
-				}*/
+				String[] parts = input.split("\t");
+				String espInput = parts[0];
+				for(int i = 1; i < parts.length; i++) {
+					espInput = '\t' + StringEscapeUtils.escapeJava(parts[i]);
+				}
+				System.out.println(espInput);*/
 			}
 		} catch (IOException io) {
 			io.printStackTrace();
 		}
+	}
+	static private String encodeUTF8(String input) {
+		byte ptext[];
+		String temp = "";
+		try {
+			ptext = input.getBytes("UTF-8");
+			temp = new String(ptext, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return temp;
 	}
 	static private String json2plain(String json) {
 		JsonObject inputJsonOject = new Gson().fromJson(json, JsonObject.class);
