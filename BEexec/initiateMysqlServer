@@ -2,6 +2,8 @@
 
 main(){
 sudo apt-get -y update
-sudo apt-get -y install mysql-server
+#sudo apt-get -y install mysql-server
+sudo apt-get -y install mysql-server-5.6
+sudo apt-get -y install s3cmd
 }
 main
