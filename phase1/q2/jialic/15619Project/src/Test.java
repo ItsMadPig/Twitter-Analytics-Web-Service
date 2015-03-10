@@ -8,7 +8,7 @@ import io.undertow.util.Headers;
 
 public class Test {
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		Undertow server = Undertow.builder().addHttpListener(8080, "0.0.0.0")
 				.setHandler(new HttpHandler() {
 
