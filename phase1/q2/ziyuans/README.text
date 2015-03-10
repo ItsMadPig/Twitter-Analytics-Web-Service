@@ -1,0 +1,18 @@
+sudo yum update
+sudo yum install mysql
+sudo yum install mysql-server
+sudo yum install mysql-devel
+
+cd /etc/yum.repos.d
+sudo wget http://s3tools.org/repo/RHEL_6/s3tools.repo
+sudo yum install s3cmd
+
+yum install binutils-* compat-libcap* compat-libstdc++-* compat-libstdc++-* gcc-* gcc-c++-* glibc-* glibc-* glibc-devel-* glibc-devel-* ksh libgcc-* libgcc-* libstdc++-* libstdc++-* libstdc++-devel-* libstdc++-devel-* libaio-* libaio-* libaio-devel-* libaio-devel-* make-* sysstat-*
+libaio-* libaio-* libaio-devel-* libaio-devel-*
+
+sudo service mysqld start
+mysql -u root
+create database mysqltwitter;
+source create_table.sql;
+GRANT ALL PRIVILEGES ON *.* TO ''@'128.237.189.93' with grant option;
+
