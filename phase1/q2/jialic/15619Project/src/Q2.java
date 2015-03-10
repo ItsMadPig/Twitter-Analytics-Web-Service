@@ -17,15 +17,12 @@ import java.util.TimeZone;
 public class Q2 {
 	private TwitterDAO twitterDAO;
 
-	Q2() {
+	Q2(String dns) {
 		try {
 			String jdbcDriverName = "com.mysql.jdbc.Driver";
 			//Put DNS address of mysql here
-			String jdbcURL = "jdbc:mysql:///mysqltwitter";
-<<<<<<< Updated upstream
-=======
+			String jdbcURL = "jdbc:mysql://"+dns+"/mysqltwitter";
 
->>>>>>> Stashed changes
 			twitterDAO = new TwitterDAO(jdbcDriverName, jdbcURL, "twitter");
 			
 		} catch (Exception e) {
@@ -52,6 +49,7 @@ public class Q2 {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+
 	}
 
 	/*
@@ -83,7 +81,7 @@ public class Q2 {
 				response.append(tweet.getTweetid()+":"+tweet.getScore()+":"+tweet.getCensoredtext()+"\n");
 			}
 		}
-		System.out.println("response: "+response);
+		//System.out.println("response: "+response);
 		return response.toString();
 	}
 
