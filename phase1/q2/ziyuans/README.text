@@ -1,11 +1,11 @@
-sudo yum update
-sudo yum install mysql
-sudo yum install mysql-server
-sudo yum install mysql-devel
+sudo yum -y update
+sudo yum -y install mysql
+sudo yum -y install mysql-server
+sudo yum -y install mysql-devel
 
 cd /etc/yum.repos.d
 sudo wget http://s3tools.org/repo/RHEL_6/s3tools.repo
-sudo yum install s3cmd
+sudo yum -y install s3cmd
 
 
 s3cmd get s3://619project.oak/raw_data/rawdata
