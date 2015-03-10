@@ -1,0 +1,52 @@
+sudo yum -y update
+sudo yum -y install mysql
+sudo yum -y install mysql-server
+sudo yum -y install mysql-devel
+
+cd /etc/yum.repos.d
+sudo wget http://s3tools.org/repo/RHEL_6/s3tools.repo
+sudo yum -y install s3cmd
+
+
+s3cmd get s3://619project.oak/raw_data/rawdata
+
+sudo yum install libaio-* libaio-* libaio-devel-* libaio-devel-*
+
+sudo service mysqld start
+mysql -u root
+create database mysqltwitter;
+source create_table.sql;
+GRANT ALL PRIVILEGES ON *.* TO 'USERNAME'@'%' with grant option;
+flush privileges;
+GRANT ALL PRIVILEGES ON *.* TO ''@'128.237.189.93' with grant option;
+
+show * from information_schema.user_privileges;
+
+mysql --verbose --help | grep my.cnf #shows /etc/my.cnf is used
+
+#after editing /etc/my.cnf
+sudo /etc/init.d/mysqld restart
+
+
+######################
+###for editing my.cnf
+#######################
+https://tools.percona.com/wizard
+http://dba.stackexchange.com/questions/22509/optimizing-mysql-for-read-only
+
+cat /proc/cpuinfo | grep processor #check number of hyperthreading*cores
+sudo dmidecode -t processor | grep HTT * check if hyperthreading enabled
+
+
+SHOW ENGINE INNODB STATUS\G # shows innodb threads
+#######################
+###testing
+#######################
+increase key-buffer-size to a few GB
+
+
+--innodb-read-only=1
+innodb_log_file_size #to 1 mb (smallest)
+
+
+
