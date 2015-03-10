@@ -1,24 +1,13 @@
-sudo yum -y update
-sudo yum -y install mysql
-sudo yum -y install mysql-server
-sudo yum -y install mysql-devel
-
-cd /etc/yum.repos.d
-sudo wget http://s3tools.org/repo/RHEL_6/s3tools.repo
-sudo yum -y install s3cmd
+#create larger ssd ebs for Backend for cache...etc
+#attach ebs where rawdata is
+#cloud-computing-project/BEexec/initiateMysqlServer
 
 
-s3cmd get s3://619project.oak/raw_data/rawdata
-
-sudo yum install libaio-* libaio-* libaio-devel-* libaio-devel-*
-
-sudo service mysqld start
 mysql -u root
 create database mysqltwitter;
 source create_table.sql;
 GRANT ALL PRIVILEGES ON *.* TO 'USERNAME'@'%' with grant option;
 flush privileges;
-GRANT ALL PRIVILEGES ON *.* TO ''@'128.237.189.93' with grant option;
 
 show * from information_schema.user_privileges;
 

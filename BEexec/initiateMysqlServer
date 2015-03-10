@@ -1,9 +1,17 @@
 #!/bin/bash
 
 main(){
-sudo apt-get -y update
-#sudo apt-get -y install mysql-server
-sudo apt-get -y install mysql-server-5.6
-sudo apt-get -y install s3cmd
+sudo yum -y update
+sudo yum -y install mysql
+sudo yum -y install mysql-server
+sudo yum -y install mysql-devel
+cd /etc/yum.repos.d
+sudo wget http://s3tools.org/repo/RHEL_6/s3tools.repo
+sudo yum -y install s3cmd
+sudo yum -y install libaio-* libaio-* libaio-devel-* libaio-devel-*
+
+sudo mount /dev/xvdf /mnt/
+cd /home/ec2-user/cloud-computing-project/phase1/q2/jialic
+sudo service mysqld start
 }
 main
