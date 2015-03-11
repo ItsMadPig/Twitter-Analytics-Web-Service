@@ -51,7 +51,7 @@ public class TwitterDAO {
             while (rs.next()) {
             	TwitterBean bean = new TwitterBean();
                 bean.setUserid_time(rs.getString("userid_time"));
-                bean.setResponse(rs.getString("response"));
+                bean.setResponse(rs.getString("response").trim());
             	list.add(bean);
             }
         	
