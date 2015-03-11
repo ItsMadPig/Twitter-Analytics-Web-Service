@@ -27,12 +27,15 @@ cat /proc/cpuinfo | grep processor #check number of hyperthreading*cores
 sudo dmidecode -t processor | grep HTT * check if hyperthreading enabled
 
 
+create index userid_ind on twitter (userid) using HASH;
+
 SHOW ENGINE INNODB STATUS\G # shows innodb threads
 #######################
 ###testing
 #######################
 increase key-buffer-size to a few GB
 
+show status like 'Table%'; # shows past sync or async calls
 
 --innodb-read-only=1
 innodb_log_file_size #to 1 mb (smallest)
