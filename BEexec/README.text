@@ -28,7 +28,8 @@ sudo dmidecode -t processor | grep HTT * check if hyperthreading enabled
 
 
 create index userid_ind on twitter (userid) using HASH;
-
+show indexes from twitter from mysqltwitter;
+drop index $INDEX_NAME on twitter
 SHOW ENGINE INNODB STATUS\G # shows innodb threads
 #######################
 ###testing
