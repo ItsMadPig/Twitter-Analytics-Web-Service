@@ -1,0 +1,18 @@
+/****************************/
+/*Used in Elastic MapReducer
+/****************************/
+
+
+/**********Local Usage*******/
+compile 	:javac -cp 'gson-2.3.1.jar:commons-lang3-3.3.2.jar' *.java
+jar			:jar -cvf MapReducer.jar *.class
+exe			:cat files | java -cp 'gson-2.3.1.jar:commons-lang3-3.3.2.jar:MapReducer.jar:.' ETLMapper | sort | java -cp 'gson-2.3.1.jar:commons-lang3-3.3.2.jar:MapReducer.jar:.' ETLReducer > outfile
+
+/**********EMR Usage*********/
+Mapper input	:java -cp 'gson-2.3.1.jar:commons-lang3-3.3.2.jar:MapReducer.jar:.’ ETLMapper
+Reducer input	:java -cp 'gson-2.3.1.jar:commons-lang3-3.3.2.jar:MapReducer.jar:.' ETLReducer
+Argument:
+-cacheFile s3n://ziyuans15619/phase1Test1G/jar/MapReducer.jar#MapReducer.jar s3n://ziyuans15619/phase1Test1G/jar/commons-lang3-3.3.2.jar#commons-lang3-3.3.2.jar s3n://ziyuans15619/phase1Test1G/jar/gson-2.3.1.jar#gson-2.3.1.jar
+Note: Only use mapper: --mapred-key-value(-m) mapred.tasktracker.reduce.tasks.maximum=0
+
+
