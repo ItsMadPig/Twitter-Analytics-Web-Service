@@ -1,0 +1,31 @@
+min number of version = 0
+max number of version = 0
+minimize number of columns
+adding salt to rowkey (for sharding)
+hbase.store.delete.expired.storefile = 0 #time to live
+43 operational and performance configuration options
+85 schema design
+
+45: cache
+51.1 hbase mapreducer read only example
+
+53 speculative execution
+
+68.2 timeline consistency set to weak
+
+sysctl -w vm.swappiness=0
+echo "vm.swappiness = 0" >> /etc/sysctl.conf
+
+
+
+
+vi $HBASE_HOME/conf/hbase-env.sh
+export HBASE_HEAPSIZE=8000
+
+vi $HBASE_HOME/conf/hbase-env.sh
+export HBASE_OPTS="$HBASE_OPTS -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -Xloggc:/usr/local/hbase/logs/gc-hbase.log"
+
+vi $HBASE_HOME/conf/hbase-env.sh
+export HBASE_OPTS= "$HBASE_OPTS -XX:CMSInitiatingOccupancyFraction=60"
+
+restart hbase
