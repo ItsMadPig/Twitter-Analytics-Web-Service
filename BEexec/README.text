@@ -1,15 +1,17 @@
 #create larger ssd ebs for Backend for cache...etc
 #attach ebs where rawdata is
 #cloud-computing-project/BEexec/initiateMysqlServer
-
+＃evironment: Amazon Linux
 
 mysql -u root
 create database mysqltwitter;
 source create_table.sql;
-GRANT ALL PRIVILEGES ON *.* TO 'USERNAME'@'%' with grant option;
+CREATE USER 'remote@'%' indentify by 'password'
+GRANT ALL PRIVILEGES ON *.* TO ''@'%' with grant option;
 flush privileges;
 
 show * from information_schema.user_privileges;
+show user, host, password from mysql.user
 
 mysql --verbose --help | grep my.cnf #shows /etc/my.cnf is used
 
