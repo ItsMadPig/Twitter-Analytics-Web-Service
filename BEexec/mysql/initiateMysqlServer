@@ -11,7 +11,7 @@ sudo yum -y install s3cmd
 sudo yum -y install libaio-* libaio-* libaio-devel-* libaio-devel-*
 
 sudo mount /dev/xvdf /mnt/
-cd /home/ec2-user/cloud-computing-project/phase1/q2/jialic
+cd /home/ec2-user/cloud-computing-project/phase1/q2/jialic/frontEnd/src
 sudo service mysqld start
 }
 main
