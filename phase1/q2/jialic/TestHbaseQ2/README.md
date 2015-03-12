@@ -1,39 +1,17 @@
-hbase-java-sample
-=========
+目前默认端口是：8080
+命令：
+cd cloud-compputing-project/phase1/q2/jialic/TestHbaseQ2/src
+#没有javac的时候要download:
+sudo yum install java-devel
+然后就可以compile:
+javac -cp '../lib/*:.' *.java
+And run:
+java -cp '../lib/*:.' Test
 
-A sample program for connecting a remote HBase in Java.
+要改变Hbase 的dns位置，请进cloud-compputing-project/phase1/q2/jialic/TestHbaseQ2/bin/Hbase-site.xml里修改
+如果把hbase-site.xml删掉，默认front end  和hbase server（back end)在同一台机器上
 
-*Don't forget to enable assert!* 
-It can be enabled as follows in eclipse:
-Window > Preferences > Java > Installed JREs > Edit > Default VM Arguments: -ea
-
-Author
-------
-
-(c) Yuji Kosuga 2012    
-<http://blog.yujikosuga.com>  
-<yujikosuga43@gmail.com>
-
-License 
--------
-
-hbase-java-sample is freely distributable under [the MIT license](http://www.opensource.org/licenses/mit-license.php).  
-
-Usage
------
-
-java Main *(with no arguments)*
-    
-    Launch this program with hbase-default.xml.
-
-java Main [config_file]
-
-    Lauch this program with the pecified config file, which is a usually a copy of hbase-site.xml.
-    A sample hbase-site.xml is in the conf directory.
-
-java Main [hbase.zookeeper.quorum] [hbase.zookeeper.property.clientPort]
-
-    Lauch this program with the specified zookeeper parameters.
-    [hbase.zookeeper.quorum] is a comma separated list of servers in the ZooKeeper Quorum, for which \"localhost\" is set in the Zookeeper default configuration.
-    [hbase.zookeeper.property.clientPort] is the port at which the clients will connect, for which \"2181\" is set in the Zookeeper default configuration.
+Test Request URL:
+GET /q1?key=306063896731552281713201727176392168770237379582172677299123272033941091616817696059536783089054693601&message=URYEXYBJB
+GET /q2?userid=2363462839&tweet_time=2014-05-14+00:27:15
 
