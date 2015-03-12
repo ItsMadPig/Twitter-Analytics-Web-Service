@@ -5,7 +5,7 @@
 
 mysql -u root
 create database mysqltwitter;
-source create_table.sql;
+source create_table_2col.sql;
 CREATE USER 'remote@'%' indentify by 'password'
 GRANT ALL PRIVILEGES ON *.* TO ''@'%' with grant option;
 flush privileges;

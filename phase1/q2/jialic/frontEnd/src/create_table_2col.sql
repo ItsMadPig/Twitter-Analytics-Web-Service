@@ -13,4 +13,5 @@ CREATE TABLE `twitter`
  ALTER DATABASE `mysqltwitter` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 LOAD DATA LOCAL  INFILE '/mnt/finaldata' INTO TABLE twitter FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\0\0\n';
 
+create index my_ind on twitter (userid_time);
 
