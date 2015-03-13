@@ -24,8 +24,11 @@ java -cp '../lib/*:.' Test
 
 
 
-Test Request URL:
-sudo telnet localhost 80
+#Test Request URL:
+sudo telnet localhost 8080
+
+
 GET /q1?key=306063896731552281713201727176392168770237379582172677299123272033941091616817696059536783089054693601&message=URYEXYBJB
+
 GET /q2?userid=2363462839&tweet_time=2014-05-14+00:27:15
 
