@@ -9,7 +9,7 @@ import io.undertow.util.Headers;
 public class Test {
 
 	public static void main(final String[] args) {
-		Undertow server = Undertow.builder().addHttpListener(8080, "0.0.0.0")
+		Undertow server = Undertow.builder().addHttpListener(80, "0.0.0.0")
 				.setHandler(new HttpHandler() {
 
 					public void handleRequest(final HttpServerExchange exchange)
