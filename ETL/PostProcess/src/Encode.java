@@ -17,7 +17,7 @@ public class Encode {
 				String timeStamp = parts[2];
 				String score = parts[3];
 				String censoredText = StringEscapeUtils.unescapeJava(parts[4]);
-				String bundle = userId + "_" + timeStamp + "\t" + tweetId + ":" + score + ":" + censoredText +"\0";
+				String bundle = userId + "_" + timeStamp + "\t|||\t" + tweetId + ":" + score + ":" + censoredText +"\0";
 				System.out.println(bundle);
 			}
 		} catch (IOException io)  {

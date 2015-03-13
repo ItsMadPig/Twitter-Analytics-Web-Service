@@ -9,27 +9,25 @@ symbolic-links=0
 default-storage-engine         = MyISAM
 # MyISAM #
  key-buffer-size                = 10G
- myisam-recover-options         = FORCE,BACKUP
+ myisam-recover                 = FORCE,BACKUP
 
  # SAFETY #
  max-allowed-packet             = 16M
  max-connect-errors             = 1000000
 # CACHES AND LIMITS #
- tmp-table-size                 = 500M        #between 500M and 650M or smaller
- max-heap-table-size            = 32M	      #between 32M and 50M
- query-cache-type               = 1 #enable
- query-cache-size               = 500M #size  between 500M and 1G
- max-connections                = 20000 #depends on linux max file descriptor
- thread-cache-size              = 50 # depends on linux max file descriptor
- open-files-limit               = 45535
+ tmp-table-size                 = 32M
+ max-heap-table-size            = 32M
+ query-cache-type               = 0
+ query-cache-size               = 0
+ max-connections                = 500
+ thread-cache-size              = 50
+ open-files-limit               = 65535
  table-definition-cache         = 1024
  table-open-cache               = 2048
 # Settings user and group are ignored when systemd is used.
 # If you need to run mysqld under a different user or group,
 # customize your systemd unit file for mysqld according to the
 # instructions in http://fedoraproject.org/wiki/Systemd
-back_log = 128 #because truncated to less /proc/sys/net/core/somaxconn
-join_buffer = 1 #no joins performed
 
 #[mysqld_safe]
 log-error=/mntmysql/var/log/mysqld.log
