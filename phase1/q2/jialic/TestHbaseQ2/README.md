@@ -8,6 +8,7 @@ Q2 for Hbase:
 #要改变Hbase 的dns位置，请进Q2Hbase.java修改这句话：
 config.set("hbase.zookeeper.quorum", "ip-172-31-18-251.ec2.internal:2181");
 
+#先进入src目录
 cd cloud-compputing-project/phase1/q2/jialic/TestHbaseQ2/src
 
 #没有javac的时候要download:
