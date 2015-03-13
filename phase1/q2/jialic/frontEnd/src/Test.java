@@ -10,6 +10,7 @@ public class Test {
 
 	public static void main(final String[] args) {
 		Undertow server = Undertow.builder().addHttpListener(80, "0.0.0.0")
+		//Undertow server = Undertow.builder().addHttpListener(8080, "0.0.0.0") //For local machine
 				.setHandler(new HttpHandler() {
 
 					public void handleRequest(final HttpServerExchange exchange)
@@ -33,6 +34,7 @@ public class Test {
 							 //long endTime   = System.currentTimeMillis();
 							 //long totalTime = endTime - startTime;
 							 //System.out.println("runtime: "+totalTime);
+						
 							 
 						 }
 						 else
