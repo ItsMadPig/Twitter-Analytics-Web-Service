@@ -4,15 +4,20 @@ Q2 for Hbase:
 
 
 
-要改变Hbase 的dns位置，请进Q2Hbase.java修改这句话：
+
+#要改变Hbase 的dns位置，请进Q2Hbase.java修改这句话：
 config.set("hbase.zookeeper.quorum", "ip-172-31-18-251.ec2.internal:2181");
 
 cd cloud-compputing-project/phase1/q2/jialic/TestHbaseQ2/src
+
 #没有javac的时候要download:
 sudo yum install java-devel
-然后就可以compile:
+
+
+#然后就可以compile:
 javac -cp '../lib/*:.' *.java
-And run:
+
+#And run:
 java -cp '../lib/*:.' Test
 
 
