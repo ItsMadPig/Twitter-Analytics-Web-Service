@@ -5,8 +5,7 @@ DROP TABLE IF EXISTS `twitter`;
 CREATE TABLE `twitter` 
   (
   `userid_time` varchar(35) NOT NULL,
-  `response` text NOT NULL,
-  `temp` text
+  `response` text NOT NULL
 )  CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

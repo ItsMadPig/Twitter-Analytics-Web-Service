@@ -10,7 +10,7 @@ public class Test {
 
 	public static void main(String[] args) {
 		System.out.println(System.getProperty("java.class.path"));
-		Undertow server = Undertow.builder().addHttpListener(8080, "0.0.0.0")
+		Undertow server = Undertow.builder().addHttpListener(80, "0.0.0.0")
 				.setHandler(new HttpHandler() {
 				
 
