@@ -29,6 +29,9 @@ public class Q2Hbase {
 			family = Bytes.toBytes("family");
 		//Go to find hbase-site.xml in class path
 	static	Configuration config = HBaseConfiguration.create();
+	static {
+		config.set("hbase.zookeeper.quorum", "ip-172-31-18-251.ec2.internal:2181");
+	}
 	static	 HTableFactory factory = new HTableFactory();
     static final HTableInterface table = factory.createHTableInterface(config, tableName);
 		 
