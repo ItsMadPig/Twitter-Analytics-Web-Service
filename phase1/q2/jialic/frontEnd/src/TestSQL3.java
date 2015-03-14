@@ -24,7 +24,9 @@ import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
 import io.undertow.util.Headers;
 /*
- * Prepared team info, delete Twitter Bean, change list<Twitter bean> to list String
+ * 
+ *  TestSQL 2: Prepared team info, delete Twitter Bean, change list<Twitter bean> to list String
+ *  Test SQL3:  compare to the previous version ,I used c3p0 as the datasource of connection pool, we found there is max 14 threads.
  */
 
 public class TestSQL3 {
