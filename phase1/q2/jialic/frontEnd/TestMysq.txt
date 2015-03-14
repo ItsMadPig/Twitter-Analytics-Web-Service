@@ -1,0 +1,4 @@
+Test Mysql database from the same instance
+Date: Sat 3:22 AM March 14 2015
+
+sudo telnet localhost 80
