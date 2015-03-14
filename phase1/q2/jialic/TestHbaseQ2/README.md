@@ -35,6 +35,7 @@ GET /q2?userid=2363462839&tweet_time=2014-05-14+00:27:15
 
 
 #如何load data:
+referece: http://hbase.apache.org/0.94/book.html#importtsv
 //Only importTSV  注意数据是\t为分隔
 
 hbase org.apache.hadoop.hbase.mapreduce.ImportTsv -Dimporttsv.columns="HBASE_ROW_KEY,family:num" oak input
