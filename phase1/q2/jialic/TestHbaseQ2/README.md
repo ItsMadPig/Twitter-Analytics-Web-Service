@@ -36,15 +36,18 @@ GET /q2?userid=2363462839&tweet_time=2014-05-14+00:27:15
 
 #如何load data:
 //Only importTSV  注意数据是\t为分隔
+
 hbase org.apache.hadoop.hbase.mapreduce.ImportTsv -Dimporttsv.columns="HBASE_ROW_KEY,family:num" oak input
 
 
 //importTsv for bulk loading
 // it creates a new empty table, and put file to hdfs
+
 hbase org.apache.hadoop.hbase.mapreduce.ImportTsv -Dimporttsv.columns="HBASE_ROW_KEY,family:num" -Dimporttsv.bulk.output=hdfs://172.31.28.91:9000/user/hadoop/output oak ../input
 
 
 
 //Bulk function---load data from dfs to hbase table
+
 hbase org.apache.hadoop.hbase.mapreduce.LoadIncrementalHFiles hdfs://172.31.28.91:9000/user/hadoop/output 'oak'
 
