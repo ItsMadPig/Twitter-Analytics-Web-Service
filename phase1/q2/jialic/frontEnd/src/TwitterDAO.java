@@ -8,7 +8,7 @@ import java.util.List;
 
 
 public class TwitterDAO {
-	private List<Connection> connectionPool = new ArrayList<Connection>();
+        //static  private List<Connection> connectionPool = new ArrayList<Connection>();
 	private String jdbcDriver;
 	private String jdbcURL;
 	private String tableName;
@@ -17,9 +17,9 @@ public class TwitterDAO {
 		this.jdbcURL    = jdbcURL;
 		this.tableName  = tableName;
 	}
-	private synchronized Connection getConnection() throws Exception {
-		if (connectionPool.size() > 0) {
-			return connectionPool.remove(connectionPool.size()-1);
+	private synchronized  Connection getConnection() throws Exception {
+		if (TestSQL4.connectionPool.size() > 0) {
+			return TestSQL4.connectionPool.remove(TestSQL4.connectionPool.size()-1);
 		}
 		
         try {
@@ -35,8 +35,8 @@ public class TwitterDAO {
         }
 	}
 	
-	private synchronized void releaseConnection(Connection con) {
-		connectionPool.add(con);
+	private synchronized  void releaseConnection(Connection con) {
+		TestSQL4.connectionPool.add(con);
 	}
 	public List<TwitterBean> getUserTweets(String userId, String tweetTime) {
     	Connection con = null;

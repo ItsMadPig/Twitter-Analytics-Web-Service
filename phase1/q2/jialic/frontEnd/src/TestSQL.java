@@ -19,11 +19,11 @@ import io.undertow.server.HttpServerExchange;
 import io.undertow.util.Headers;
 
 
-public class Test {
+public class TestSQL {
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		connectSQL();
-		Undertow server = Undertow.builder().addHttpListener(8080, "0.0.0.0")
+		Undertow server = Undertow.builder().addHttpListener(80, "0.0.0.0")
 				.setHandler(new HttpHandler() {
 					
 					public void handleRequest(final HttpServerExchange exchange)
@@ -40,15 +40,15 @@ public class Test {
 							        System.out.println("Proper Usage is: java Test <DNS name of mysql server>");
 							        System.exit(0);
 							    }
-							 long startTime = System.currentTimeMillis();
+							// long startTime = System.currentTimeMillis();
 							// //System.out.println(Arrays.toString(args));
 							// Q2 q2 = new Q2(args[0]);
 							// Q2Hbase q2 = new Q2Hbase();
 							// q2.processRequest(exchange);
 							 getResponse(exchange);
-							 long endTime   = System.currentTimeMillis();
-							 long totalTime = endTime - startTime;
-							 System.out.println("runtime: "+totalTime);
+							// long endTime   = System.currentTimeMillis();
+							// long totalTime = endTime - startTime;
+							// System.out.println("runtime: "+totalTime);
 							 
 						 }
 						 else

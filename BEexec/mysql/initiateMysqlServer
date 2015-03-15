@@ -10,8 +10,8 @@ sudo wget http://s3tools.org/repo/RHEL_6/s3tools.repo
 sudo yum -y install s3cmd
 sudo yum -y install libaio-* libaio-* libaio-devel-* libaio-devel-*
 sudo yum -y install java-1.7.0-openjdk-devel
-sudo mount /dev/xvdf /mnt/
+#sudo mount /dev/xvdf /mnt/
 cd /home/ec2-user/cloud-computing-project/phase1/q2/jialic/frontEnd/src
-sudo service mysqld start
+#sudo service mysqld start
 }
 main
