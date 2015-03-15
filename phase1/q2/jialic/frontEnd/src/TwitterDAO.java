@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class TwitterDAOSQL4 {
+public class TwitterDAO {
       
 	private String jdbcDriver;
 	private String jdbcURL;
