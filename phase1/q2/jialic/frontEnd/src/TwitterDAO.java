@@ -12,7 +12,7 @@ public class TwitterDAO {
 	private String jdbcDriver;
 	private String jdbcURL;
 	private String tableName;
-	public TwitterDAOSQL4(String jdbcDriver, String jdbcURL, String tableName) throws Exception {
+	public TwitterDAO(String jdbcDriver, String jdbcURL, String tableName) throws Exception {
 		this.jdbcDriver = jdbcDriver;
 		this.jdbcURL    = jdbcURL;
 		this.tableName  = tableName;
