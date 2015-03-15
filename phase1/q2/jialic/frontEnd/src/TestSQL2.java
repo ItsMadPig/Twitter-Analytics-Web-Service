@@ -94,7 +94,6 @@ public class TestSQL2 {
 	}
 	static Connection con=null;
 	static String jdbcTable="twitter";
-  // static PreparedStatement pstmt;
 	static void connectSQL(String dns){
 		try {
 		String jdbcDriverName = "com.mysql.jdbc.Driver";
@@ -102,7 +101,6 @@ public class TestSQL2 {
 		String jdbcURL = "jdbc:mysql://"+dns+"/mysqltwitter";
 		Class.forName(jdbcDriverName);
 		con=DriverManager.getConnection(jdbcURL);
-		// pstmt = con.prepareStatement("SELECT * FROM " + jdbcTable + " WHERE userid_time=?");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -110,7 +108,7 @@ public class TestSQL2 {
 	}
 	static List<String>  querySQL(String userid_time){
 		try {
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM " + jdbcTable + " WHERE userid_time=?");
+		PreparedStatement pstmt = con.prepareStatement("SELECT * FROM " + jdbcTable + " WHERE userid_time=?");
 			pstmt.setString(1,userid_time);
     	ResultSet rs = pstmt.executeQuery();
     	
