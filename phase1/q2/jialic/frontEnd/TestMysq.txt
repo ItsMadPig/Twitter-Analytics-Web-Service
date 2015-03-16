@@ -1,0 +1,7 @@
+Test Mysql database from the same instance
+Date: Sat 3:22 AM March 14 2015
+
+sudo telnet localhost 80
+GET /q2?userid=2363462839&tweet_time=2014-05-14+00:27:15 HTTP/1.1
+
+

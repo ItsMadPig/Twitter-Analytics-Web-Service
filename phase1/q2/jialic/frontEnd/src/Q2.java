@@ -81,6 +81,9 @@ public class Q2 {
 				response.append(tweet.getResponse()+"\n");
 			}
 		}
+		if (response.toString().equals("")){
+			System.out.println("error here");
+		}
 		//System.out.println("response: "+response);
 		return response.toString();
 	}
