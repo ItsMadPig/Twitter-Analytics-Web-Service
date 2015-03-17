@@ -38,7 +38,7 @@ public class Test {
 						 else
 						{
 							System.out
-									.println("Waiting for another correct url request");
+									.println(exchange.getQueryString());
 							
 						}
 						 exchange.getResponseHeaders().put(Headers.CONTENT_TYPE,
