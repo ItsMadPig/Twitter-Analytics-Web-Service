@@ -39,6 +39,7 @@ public class Test {
 						{
 							System.out
 									.println(exchange.getQueryString());
+							response="Incorrect Request: "+exchange.getQueryString();
 							
 						}
 						 exchange.getResponseHeaders().put(Headers.CONTENT_TYPE,
