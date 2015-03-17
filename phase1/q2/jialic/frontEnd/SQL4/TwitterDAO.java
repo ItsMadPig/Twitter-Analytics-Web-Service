@@ -46,7 +46,7 @@ public class TwitterDAO {
     	Connection con = null;
         try {
         	con = getConnection();
-        	PreparedStatement pstmt = con.prepareStatement("SELECT * FROM " + tableName + " WHERE userid_time=?");
+        	PreparedStatement pstmt = con.prepareStatement("SELECT response FROM " + tableName + " WHERE userid_time=?");
         	pstmt.setString(1,userid_time);
         	ResultSet rs = pstmt.executeQuery();
         	
