@@ -52,7 +52,7 @@ public class TwitterDAO {
         	
         	List<String> list = new ArrayList<String>();
             while (rs.next()) {
-            	list.add(rs.getString("response").trim());
+            	list.add(rs.getString(1).trim());
             }
         	
         	
