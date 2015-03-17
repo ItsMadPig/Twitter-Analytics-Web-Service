@@ -38,7 +38,7 @@ public class Test {
 						 else
 						{
 							System.out
-									.println(exchange.getQueryString());
+									.println(requestPath+"?"+exchange.getQueryString());
 							response="Incorrect Request: "+exchange.getQueryString();
 							
 						}
