@@ -9,7 +9,8 @@ fe1-database1-sql4-10min: 793.4	61
 fe1-database1-sql4-3min: 3023.8	14 (aaron  changed mb to kb)
 fe1-database1-sql4-3min: 585.1	76 (back to kb)
 fe1-database1-sql4-3min: 3026.6	14(tmp_table_size)
-haproxy-fe1-database1-sql4-3min: 3026.6	14(tmp_table_size)
+haproxy-fe1-database1-sql4-3min: 3169.1	13(haproxy with one instance with health check)
+haproxy-fe1-database1-sql4-3min: 3169.1	13(haproxy with one instance without health check)
 
 
 
