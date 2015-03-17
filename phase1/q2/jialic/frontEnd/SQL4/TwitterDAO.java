@@ -13,7 +13,7 @@ import java.util.List;
 public class TwitterDAO {
 	static private List<Connection> connectionPool = new ArrayList<Connection>();  
 	static private String jdbcDriver ="com.mysql.jdbc.Driver";
-	static private String jdbcURL = "jdbc:mysql://ec2-54-152-118-207.compute-1.amazonaws.com/mysqltwitter";
+	static private String jdbcURL = "jdbc:mysql://ec2-54-152-108-179.compute-1.amazonaws.com/mysqltwitter";
 	static private String tableName="twitter";
 
 	private synchronized static  Connection getConnection() throws Exception {
