@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Deque;
 import java.util.LinkedHashMap;
@@ -42,6 +43,7 @@ public class Q2 {
 	 */
 	private String getMessage(String userid_time) {
 		List<String> message = TwitterDAO.getUserTweets(userid_time);
+		Collections.sort(message);
 		StringBuilder response=new StringBuilder("");
 		//System.out.println("empty response: "+response+"  size: "+message.size());
 		if (message!=null && message.size()>0) {
