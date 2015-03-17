@@ -38,7 +38,7 @@ import org.apache.hadoop.hbase.util.Bytes;
 
 public class Q2Hbase {
 	static final byte[] tableName = Bytes.toBytes("hbase-cluster-twitter"),
-            ctweetID=Bytes.toBytes("twitterId"),
+            ctweetID=Bytes.toBytes("tweetId"),
             cscore=Bytes.toBytes("score"),
             ccencored=Bytes.toBytes("censoredText"),
             family = Bytes.toBytes("family");
