@@ -39,3 +39,10 @@ mode http
 balance roundrobin
 option httpchk GET /healthcheck
 server fe1 ec2-54-174-29-127.compute-1.amazonaws.com:80 check port 80
+
+listen stats 0.0.0.0:8888
+       mode http
+       transparent
+       stats uri /haproxy-stats
+       stats realm Haproxy \ statistic
+       stats auth admin:admin
