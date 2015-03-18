@@ -41,21 +41,7 @@ public class Q2 {
 	/*
 	 * Get text from Mysql
 	 */
-	
-	 private static final int MAX_ENTRIES = 500000;
-	Map<String, String> map = new LinkedHashMap<String,String>(MAX_ENTRIES, .75F, true) {
-		 /**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-
-		protected boolean removeEldestEntry(Map.Entry eldest) {
-	            return size() > MAX_ENTRIES;
-	         }
-	};
 	private String getMessage(String userid_time) {
-		if (map.containsKey(userid_time))
-			return map.get(userid_time);
 		List<String> message = TwitterDAO.getUserTweets(userid_time);
 		Collections.sort(message);
 		StringBuilder response=new StringBuilder("");
@@ -65,7 +51,6 @@ public class Q2 {
 				response.append(tweet+"\n");
 			}
 		}
-		map.put(userid_time, response.toString());
 		//System.out.println("response: "+response);
 		return response.toString();
 	}

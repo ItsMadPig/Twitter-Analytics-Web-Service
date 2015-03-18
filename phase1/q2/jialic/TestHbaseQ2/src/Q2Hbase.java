@@ -11,13 +11,16 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.NavigableMap;
 import java.util.TimeZone;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.client.Get;
+import org.apache.hadoop.hbase.client.HTable;
 import org.apache.hadoop.hbase.client.HTableFactory;
 import org.apache.hadoop.hbase.client.HTableInterface;
 import org.apache.hadoop.hbase.client.Result;
@@ -74,7 +77,7 @@ public class Q2Hbase {
 		return response;
 	}
 
-	private String getMessageFromHbase(String userId, String tweetTime) {
+	private String getMessageFromHbasejaly(String userId, String tweetTime) {
 		try {
 		String rowKeyStr= userId+'_'+tweetTime;
 		final byte[] rowKey = Bytes.toBytes(rowKeyStr);
@@ -90,6 +93,61 @@ public class Q2Hbase {
 		}
 		
 	}
+	private String getMessageFromHbase(String userId, String tweetTime) {
+		HTable table = null;
+        try {
+     
+        	table = new HTable(tableName,  connection);
+			
+	        String rowKeyStr= userId+'_'+tweetTime;
+	        //String rowKeyStr= userId;
+	        final byte[] rowKey = Bytes.toBytes(rowKeyStr);
+	        Get get = new Get(rowKey);
+	        get.setMaxVersions(10);
+	        Result result = table.get(get);
+	        final NavigableMap<byte[], NavigableMap<byte[], NavigableMap<Long, byte[]>>> map = result.getMap();
+	        final NavigableMap<byte[], NavigableMap<Long, byte[]>> familyMap = map.get(family);
+	        final NavigableMap<Long, byte[]> versionMap_ctweetID = familyMap.get(ctweetID);
+	        final NavigableMap<Long, byte[]> versionMap_cscore = familyMap.get(cscore);
+	        final NavigableMap<Long, byte[]> versionMap_ccencored = familyMap.get(ccencored);
+	        List<String> col1 = new LinkedList<String>();
+	        List<String> col2 = new LinkedList<String>();
+	        List<String> col3 = new LinkedList<String>();
+	        for (final Map.Entry<Long, byte[]> entry : versionMap_ctweetID.entrySet())
+	        {
+	                col1.add(Bytes.toString(entry.getValue()));
+	        }
+	        for (final Map.Entry<Long, byte[]> entry : versionMap_cscore.entrySet())
+	        {
+	                col2.add(Bytes.toString(entry.getValue()));
+	        }
+	        for (final Map.Entry<Long, byte[]> entry : versionMap_ccencored.entrySet())
+	        {
+	                col3.add(Bytes.toString(entry.getValue()));
+	        }
+            String temp = "";
+            ListIterator<String> iter1 = col1.listIterator();
+            ListIterator<String> iter2 = col2.listIterator();
+            ListIterator<String> iter3 = col3.listIterator();
+            while(iter1.hasNext() && iter2.hasNext() && iter3.hasNext()){
+                    String text = StringEscapeUtils.unescapeJson(iter3.next());
+                    temp =  iter1.next() + ':' + iter2.next() + ':' + text.substring(0, text.length()-1) + '\n' + temp;
+            }
+            return temp;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			try {
+				table.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
 
 
 
