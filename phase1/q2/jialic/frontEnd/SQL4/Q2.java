@@ -43,7 +43,7 @@ public class Q2 {
 	 */
 	
 	 private static final int MAX_ENTRIES = 500000;
-	Map<String, String> map = new LinkedHashMap<String,String>(MAX_ENTRIES, .75F, true) {
+      static Map<String, String> map = new LinkedHashMap<String,String>(MAX_ENTRIES, .75F, true) {
 		 /**
 		 * 
 		 */
