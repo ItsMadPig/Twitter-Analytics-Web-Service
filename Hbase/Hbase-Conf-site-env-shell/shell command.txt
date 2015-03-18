@@ -1,0 +1,18 @@
+Shell Command
+
+
+disable 'hbase-cluster-twitter'
+alter 'hbase-cluster-twitter',NAME=>'family',BLOOMFILTER => 'ROW'
+alter 'hbase-cluster-twitter',NAME=>'family',IN_MEMORY => false
+alter 'hbase-cluster-twitter',NAME=>'family',COMPRESSION => 'SNAPPY'
+major_compact 'hbase-cluster-twitter'
+split 'hbase-cluster-twitter,102370336_2014-06-23 13:33:41,1426592537416.4832418b8f29d6504e65ad82a527ed'
+move 'b9d0a03ab6eda5175342af35e5e1c607','ip-172-31-50-199.ec2.internal,60030,1426625382467'
+enable 'hbase-cluster-twitter'
+
+
+create 'hbase-cluster-twitter','family'
+Block Cache(default : true)
+
+
+http://www-01.ibm.com/support/knowledgecenter/SSPT3X_3.0.0/com.ibm.swg.im.infosphere.biginsights.analyze.doc/doc/bigsql_gentune.html

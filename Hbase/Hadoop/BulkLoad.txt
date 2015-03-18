@@ -1,0 +1,10 @@
+Load
+
+hadoop dfs -put /user/hadoop/hadoopfile LOCALFILE
+
+bin/hbase org.apache.hadoop.hbase.mapreduce.ImportTsv -Dimporttsv.columns='HBASE_ROW_KEY,family:tweetId,family:score,family:censoredText' -Dimporttsv.bulk.output=hdfs://172.31.62.246:9000/user/bulk 'hbase-cluster-twitter' /user/hadoop/hadoopfile
+
+bin/hbase org.apache.hadoop.hbase.mapreduce.LoadIncrementalHFiles hdfs://172.31.62.246:9000/user/bulk 'hbase-cluster-twitter’
+
+
+http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html
