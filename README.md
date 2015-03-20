@@ -2,16 +2,27 @@
 15619 cloud computing team project
 
 startInstances.py- creates a ELB and front end servers
-FEexec/initiateFrontEnd 
-BEexec/mysql/initiateMysqlServer
-replace crontab with /etc/init.d/crontab
-create image id -> instance AMI
 
-FEexec/startFEserver - when reboot or startup, auto started by crontab
+ETL
+	map reduce code and post process
+FEexec
+	replace crontab with /etc/init.d/crontab
+	run code to initiate front end
+	startFEserver - when reboot or startup, auto started by crontab
 
-phase1/q1/Q1.java - front end code
+mysql/   all mysql code
+	load_table -> script for loading table into mysql
+	(newest create_table_2col.sql)
 
-phase2
+Hbase/   all hbase code
+	conf/ -> all configuration files
+	FE-HBase -> hbase front end
+	readmes -> commands done in shell, bulk load data, backup,restart
+
+
+
+phase2/
+	src code and lib etc
 
 
 
