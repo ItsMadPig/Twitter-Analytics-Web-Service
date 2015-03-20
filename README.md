@@ -19,7 +19,8 @@ Hbase/   all hbase code
 	FE-HBase -> hbase front end
 	readmes -> commands done in shell, bulk load data, backup,restart
 
-
+test/
+	data used for testing/debugging
 
 phase2/
 	src code and lib etc
