@@ -14,9 +14,6 @@ SECURITYGROUPNAME = "http_script"
 SECURITYGROUPDESC = "http_via_script"
 
 
-###########################################
-##Code by Aaron Hsu ahsu1@andrew.cmu.edu
-##########################################
 import boto.ec2
 import time
 import urllib2
