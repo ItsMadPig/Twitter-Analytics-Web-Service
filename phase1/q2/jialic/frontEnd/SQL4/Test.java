@@ -24,6 +24,11 @@ public class Test {
               						return;
             					}
 						String requestPath = exchange.getRequestPath();
+						if (requestPath.equals("/q1")) {
+							Q1 q1 = new Q1();
+							response = q1.processRequest(exchange);
+						}
+						else 
 						 if (requestPath.equals("/q2")) {
 							 //long startTime = System.currentTimeMillis();
 							 //System.out.println(Arrays.toString(args));
