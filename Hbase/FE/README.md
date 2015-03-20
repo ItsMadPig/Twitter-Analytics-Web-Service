@@ -1,8 +1,8 @@
-Version(Mar. 17)
+#Version(Mar. 17)
 
-#没有javac的时候要download:
+#install javac
 sudo yum install java-devel
-然后就可以compile:
+#then this can be compiled
 javac -cp '../lib/*:.' *.java
 And run:
 sudo java -cp '../lib/*:.' Test

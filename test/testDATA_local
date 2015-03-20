@@ -69,3 +69,20 @@ http://localhost:8080/q2?userid=302342307&tweet_time=2014-05-29+21:46:11
 Response:
 Team,1234-5678-1234,1234-5678-1234,1234-5678-1234
 472131817194024960:-45:I HATE HATE HATE HATE HATE HATE HATE HATE HATE HATE HATE HATE HATE HATE HATE FLUKE!!!! #GH #GeneralHospital #TeamRicGH #TeamLiRic #LiRic
+
+
+
+select * from twitter where userid_time = '2431786952_2014-05-29 23:01:47';
+select * from twitter where userid_time = '302342307_2014-05-29 21:46:11';
+select * from twitter where userid_time = '2431786952_2014-05-29 23:01:47';
+select * from twitter where userid_time = '2431786952_2014-05-29 23:01:47';
+
+
+
+
+There is a first-read penalty for EBS volumes created from snapshots, as the volume is made available before all of the blocks have been successfully loaded.  You can negate this penalty by forcing every block on the volume to be read:
+
+$ dd if=/dev/<device> of=/dev/null
+
+Regards,
+-Jason

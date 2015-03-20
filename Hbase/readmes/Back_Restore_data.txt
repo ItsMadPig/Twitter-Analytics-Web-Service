@@ -1,0 +1,5 @@
+#BACKUP
+aws emr create-hbase-backup --cluster-id j-3AEXXXXXX16F2(old) --dir s3://mybucket/backups/20150316T075332Z
+
+#RESTORE FORM S3
+aws emr restore-from-hbase-backup --cluster-id j-3AEXXXXXX16F2(new) --dir s3://ziyuans15619/hbase-backup/j-1SC4KU9SE76F --backup-version 20150316T075332Z

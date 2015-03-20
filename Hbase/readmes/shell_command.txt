@@ -1,4 +1,5 @@
-Shell Command
+#Shell Command
+#for configuring tables
 
 
 disable 'hbase-cluster-twitter'
