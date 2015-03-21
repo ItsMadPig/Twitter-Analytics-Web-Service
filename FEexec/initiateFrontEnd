@@ -1,7 +1,6 @@
 #!/bin/bash
 
 main(){
-sudo apt-get -y update
-sudo apt-get -y install default-jdk
+yum install java-devel
 }
 main
