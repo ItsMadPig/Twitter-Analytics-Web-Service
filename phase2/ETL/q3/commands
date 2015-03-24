@@ -5,6 +5,8 @@ cat /Users/Scarlett/Desktop/eBusiness/15619/619Project/15619s15twitter-parta-aa 
 运行，去重：cat /Users/Scarlett/Desktop/eBusiness/15619/619Project/15619s15twitter-parta-aa |java -cp "../lib/*:." MapReduce.Mapper |sort -k1 -u>afterMapper
 
 
+从mapper出来的数据去进行postProcess:
+cat afterMapper | java -cp "../lib/*:." MapReduce.PostProcess >MapReduce/loadDataQ3
 
 一份数据 mapper之后的条数是：155752
 如果是unique的话，是：153199
