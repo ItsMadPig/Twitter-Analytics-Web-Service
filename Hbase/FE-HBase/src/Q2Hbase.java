@@ -20,6 +20,8 @@ import java.util.NavigableMap;
 import java.util.TimeZone;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.lang.String;
+import java.lang.Object;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.hadoop.conf.Configuration;
@@ -33,8 +35,17 @@ import org.apache.hadoop.hbase.client.HTable;
 import org.apache.hadoop.hbase.client.HTableFactory;
 import org.apache.hadoop.hbase.client.HTableInterface;
 import org.apache.hadoop.hbase.client.Result;
+import org.apache.hadoop.hbase.client.ResultScanner;
+import org.apache.hadoop.hbase.client.Operation;
+import org.apache.hadoop.hbase.client.OperationWithAttributes;
 import org.apache.hadoop.hbase.client.Scan;
+import org.apache.hadoop.hbase.client.AbstractClientScanner;
+
+
+import org.apache.hadoop.hbase.filter.Filter;
+import org.apache.hadoop.hbase.filter.ColumnRangeFilter;
 import org.apache.hadoop.hbase.util.Bytes;
+
 
 public class Q2Hbase {
     static final byte[] tableName = Bytes.toBytes("hbase-cluster-twitter"),
@@ -98,7 +109,7 @@ public class Q2Hbase {
         }
 
 
-	 private String getMessageFromHbase(String userId, String tweetTime) {
+	    private String getMessageFromHbase(String userId, String tweetTime) {
                 HTable table = null;
                 try {
                         //long startTime = System.currentTimeMillis();
@@ -177,6 +188,69 @@ public class Q2Hbase {
                                 e.printStackTrace();
                         }
                 }
+        }
+
+        private String getResponseQ4(String tag, String startTime, String endTime) {
+                String message = getMessageFromHbaseQ4(tag, startTime, endTime);
+                String teamID = "Oak";
+                final String AWS_ACCOUNT_ID1 = "397168420013", // jiali
+                AWS_ACCOUNT_ID2 = "779888392921", // ziyuan
+                AWS_ACCOUNT_ID3 = "588767211863";// Aaron
+
+                String response = String.format("%s,%s,%s,%s\n%s", teamID,
+                                AWS_ACCOUNT_ID1, AWS_ACCOUNT_ID2, AWS_ACCOUNT_ID3, message);
+
+                return response;
+        }
+
+        private String getMessageFromHbaseQ4(String tag, String startTime, String endTime){
+            HTable table = null;
+            try{
+            table = new HTable(tableName,  connection);
+            byte[] tag_bytes = Bytes.toBytes(tag);
+            Scan s = new Scan(tag_bytes,tag_bytes);
+            //true for inclusive, startTime, endTime for qualifier
+            Filter f = new ColumnRangeFilter(Bytes.toBytes(startTime),true,
+                                             Bytes.toBytes(endTime),true);
+            s.setFilter(f);
+            String temp = "";
+            String str_val = "";
+            List<String> list_val = new ArrayList<String>();
+            ResultScanner rs = table.getScanner(s);
+            Result r;
+            for (r = rs.next(); r != null; r = rs.next()) {
+                // r will now have all HBase columns that start with "fluffy",
+                // which would represent a single row
+              for (KeyValue kv : r.raw()) {
+                  // each kv represent - the latest version of - a column
+                  list_val.add(Bytes.toString(kv.getValue()));
+              }
+              while (list_val.size()>1){
+                  int oldest = 0;
+                  int list_size = list_val.size();
+                  int i = 0;
+                  for (i=1;i<list_size;i++){
+                    if (Integer.parseInt(list_val.get(oldest).substring(0,(list_val.get(oldest).indexOf(',')))) >
+                        Integer.parseInt(list_val.get(i).substring(0,(list_val.get(i).indexOf(','))))){
+                      oldest = i;
+                    }
+                  }
+                  temp+= list_val.get(oldest);
+                }
+            }
+            return temp;
+          }catch (IOException e) {
+              // TODO Auto-generated catch block
+              e.printStackTrace();
+              System.out.println("error here.");
+              return null;
+          }finally {
+              try {
+                  table.close();
+              } catch (IOException e) {
+                  e.printStackTrace();
+              }
+          }
         }
 }
 
