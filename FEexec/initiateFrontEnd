@@ -1,6 +1,7 @@
 #!/bin/bash
 
 main(){
-yum install java-devel
+sudo yum update
+sudo yum -y install java-devel
 }
 main

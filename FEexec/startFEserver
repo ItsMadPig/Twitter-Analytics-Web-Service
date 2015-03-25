@@ -1,9 +1,10 @@
 #!/bin/bash
 
 main(){
-cd /home/ubuntu/cloud-computing-project/phase1/q1
-javac -classpath "lib/" Q1.java
-java -classpath "lib/*:." Q1 > /home/ubuntu/test.log &
+cd /home/ec2-user/cloud-computing-project/phase1/q2/
+javac -cp 'lib/*:.' SQL/*.java
+sudo java -cp 'lib/*:.' SQL.Test
+# > /home/ec2-user/test.log &
 }
 
 main

@@ -1,4 +1,4 @@
-package SQL4;
+package SQL;
 import io.undertow.Undertow;
 import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
