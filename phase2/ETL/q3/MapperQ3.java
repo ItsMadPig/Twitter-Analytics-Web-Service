@@ -1,4 +1,5 @@
 
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,12 +21,13 @@ public class MapperQ3 {
 					JsonObject inputJsonOject = new Gson().fromJson(json,
 							JsonObject.class);
 					String userId = inputJsonOject.get("user")
-							.getAsJsonObject().get("id").getAsString();
+							.getAsJsonObject().get("id_str").getAsString();
 					JsonElement retweet = inputJsonOject.get("retweeted_status"); //Returns: the member matching the name. Null if no such member exists.
 					if (retweet!=null) {
 						String retweetId = retweet.getAsJsonObject().get("user")
-								.getAsJsonObject().get("id").getAsString();
-						System.out.println(userId+"\t"+retweetId);
+								.getAsJsonObject().get("id_str").getAsString();
+						System.out.println(userId+"\t"+"-"+retweetId);
+						System.out.println(retweetId+"\t"+"+"+userId);
 					}
 				}
 			}
