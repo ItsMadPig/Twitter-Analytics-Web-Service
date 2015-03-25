@@ -7,6 +7,7 @@ import io.undertow.util.Headers;
 import java.math.BigInteger;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Deque;
 import java.util.Map;
@@ -16,13 +17,13 @@ public class Q1 {
 	/*
 	 * return Y: this will always be a prime positive number
 	 */
-	int getY(String strXY) {
+	long getY(String strXY) {
 		final String strX = "8271997208960872478735181815578166723519929177896558845922250595511921395049126920528021164569045773";
 		BigInteger x = new BigInteger(strX);
 		BigInteger xy = new BigInteger(strXY);
 		BigInteger y = xy.divide(x);
-		int inty = y.intValue();
-		return inty;
+		long numy = y.longValue();
+		return numy;
 	}
 
 	/*
@@ -30,13 +31,12 @@ public class Q1 {
 	 * length example: c=URYEXYBJB -> intermediate message i: URYYBJBEX
 	 */
 	String getMessage(String key, String ciphertext) {
-		int y = getY(key);
-
+		long y = getY(key);
 		char[] messageI = getMessageI(ciphertext);
 
 		// Get IntermediateKey Z
-		int z = 1 + (y % 25);
-		// System.out.println("z is "+z);
+		int z = (int)(1 + (y % 25));
+	//	 System.out.println("z is "+z);
 
 		// Convert messageI to messageM
 		String messageM = getMessageM(messageI, z);
@@ -48,13 +48,13 @@ public class Q1 {
 	 * Get message M from Intermediate message I and intermediate Key Z
 	 */
 	private String getMessageM(char[] chsI, int z) {
-		// System.out.println("messageI "+Arrays.toString(chsI));
+	// System.out.println("messageI "+Arrays.toString(chsI));
 		for (int i = 0; i < chsI.length; i++) {
 			chsI[i] = (char) (chsI[i] - z) >= 'A' ? (char) (chsI[i] - z)
 					: (char) (chsI[i] + 26 - z);
 		}
 
-		// System.out.println("messageI "+Arrays.toString(chsI));
+	//	System.out.println("messageI "+Arrays.toString(chsI));
 		return String.valueOf(chsI);
 	}
 
