@@ -17,14 +17,11 @@ public class MapperQ3 {
 			String json;
 			while ((json = br.readLine()) != null) {
 				if (!json.trim().equals("")) {
-					JsonObject inputJsonOject = new Gson().fromJson(json,
-							JsonObject.class);
-					String userId = inputJsonOject.get("user")
-							.getAsJsonObject().get("id").getAsString();
+					JsonObject inputJsonOject = new Gson().fromJson(json,JsonObject.class);
+					String userId = inputJsonOject.get("user").getAsJsonObject().get("id").getAsString();
 					JsonElement retweet = inputJsonOject.get("retweeted_status"); //Returns: the member matching the name. Null if no such member exists.
 					if (retweet!=null) {
-						String retweetId = retweet.getAsJsonObject().get("user")
-								.getAsJsonObject().get("id").getAsString();
+						String retweetId = retweet.getAsJsonObject().get("user").getAsJsonObject().get("id").getAsString();
 						System.out.println(userId+"\t"+retweetId);
 					}
 				}
