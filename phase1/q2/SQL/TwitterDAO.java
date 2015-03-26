@@ -1,4 +1,4 @@
-package SQL4;
+package SQL;
 
 
 import java.sql.Connection;
@@ -13,7 +13,7 @@ import java.util.List;
 public class TwitterDAO {
 	static private List<Connection> connectionPool = new ArrayList<Connection>();  
 	static private String jdbcDriver ="com.mysql.jdbc.Driver";
-	static private String jdbcURL = "jdbc:mysql://ec2-54-152-242-213.compute-1.amazonaws.com/mysqltwitter";
+	static private String jdbcURL = "jdbc:mysql://ec2-54-173-32-254.compute-1.amazonaws.com/mysqltwitter";
 	static private String tableName="twitter";
 
 	private synchronized static  Connection getConnection() throws Exception {

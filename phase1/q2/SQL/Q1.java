@@ -1,3 +1,4 @@
+package SQL;
 import io.undertow.Undertow;
 import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
@@ -117,7 +118,8 @@ public class Q1 {
 					.println("You didn't input your key and cipherText in your request url. Please try again!");
 			System.out.println(e);
 		}
-
+	
+		return "";
 	}
 
 	/*
