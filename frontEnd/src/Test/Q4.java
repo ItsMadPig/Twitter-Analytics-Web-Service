@@ -23,7 +23,7 @@ public class Q4 {
 					"yyyy-MM-dd");
 			Date startDate = Date.valueOf(start);
 			Date endDate =Date.valueOf(end);
-			
+		       //System.out.println(start);	
 			String response = queryMysql(hashtag, startDate, endDate).replace(';', '\n');
             return response;
 		} catch (Exception e) {
@@ -36,7 +36,7 @@ public class Q4 {
     	Connection con = null;
         try {
         	con = MysqlConnection.getConnection();
-        	PreparedStatement pstmt = con.prepareStatement("SELECT response FROM " + tableName + " WHERE BINARY hashtag=? and tweetdate>=? and tweetdate<=?");
+        	PreparedStatement pstmt = con.prepareStatement("SELECT response FROM " + tableName + " WHERE  hashtag=? and tweetdate>=? and tweetdate<=?");
         	pstmt.setString(1,hashtag);
         	pstmt.setDate(2, startDate);
         	pstmt.setDate(3, endDate);
@@ -45,6 +45,7 @@ public class Q4 {
         	StringBuffer ans=new StringBuffer();
         	
             while (rs.next()) {
+                 //System.out.println(rs.getString(1));
             	ans.append(rs.getString(1).trim());
             }
         	

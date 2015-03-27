@@ -4,14 +4,14 @@ DROP TABLE IF EXISTS `q4`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `q4` 
   (
-  `hashtag` varchar(100) NOT NULL,
+  `hashtag` varchar(200) NOT NULL,
   `tweetdate` DATE NOT NULL,	
   `response` LONGTEXT NOT NULL,
   INDEX hashtag_date (hashtag, tweetdate)
-)  CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+)  CHARACTER SET latin1 COLLATE latin1_general_cs;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
-LOAD DATA LOCAL  INFILE 'q4data' INTO TABLE q4 FIELDS TERMINATED BY '_' LINES TERMINATED BY '\n';
+LOAD DATA LOCAL  INFILE '/mnt/q4' INTO TABLE q4 FIELDS TERMINATED BY '_' LINES TERMINATED BY '\n';
 
 
