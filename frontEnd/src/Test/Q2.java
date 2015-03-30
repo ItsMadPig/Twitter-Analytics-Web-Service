@@ -4,11 +4,13 @@ import io.undertow.util.Headers;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Deque;
@@ -18,6 +20,8 @@ import java.util.Map;
 import java.util.TimeZone;
 
 public class Q2 {
+	static private String tableName="twitter";
+
 
 	protected static String processRequest(HttpServerExchange exchange) {
 		
@@ -42,7 +46,7 @@ public class Q2 {
 	 * Get text from Mysql
 	 */
 	private static  String getMessage(String userid_time) {
-		List<String> message = TwitterDAO.getUserTweets(userid_time);
+		List<String> message = getUserTweets(userid_time);
 		Collections.sort(message);
 		StringBuilder response=new StringBuilder("");
 		//System.out.println("empty response: "+response+"  size: "+message.size());
@@ -54,5 +58,40 @@ public class Q2 {
 		//System.out.println("response: "+response);
 		return response.toString();
 	}
+	
+
+
+	public static List<String> getUserTweets(String userid_time) {
+    	Connection con = null;
+        try {
+        	con = MysqlConnection.getConnection();
+        	PreparedStatement pstmt = con.prepareStatement("SELECT response FROM " + tableName + " WHERE userid_time=?");
+        	pstmt.setString(1,userid_time);
+        	ResultSet rs = pstmt.executeQuery();
+        	
+        	List<String> list = new ArrayList<String>();
+            while (rs.next()) {
+            	list.add(rs.getString(1).trim());
+            }
+        	
+        	
+        	rs.close();
+        	pstmt.close();
+        	MysqlConnection.releaseConnection(con);
+        	 return list;
+            
+        } catch (Exception e) {
+            try { if (con != null) con.close(); } catch (SQLException e2) { /* ignore */ }
+        	try {
+				throw new Exception(e);
+			} catch (Exception e1) {
+				
+				e1.printStackTrace();
+				
+			}
+        	return null;
+        }
+	}
+		
 
 }
