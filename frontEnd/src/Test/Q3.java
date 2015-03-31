@@ -11,8 +11,12 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 import java.util.Map;
+import java.lang.String;
 
 public class Q3 {
+	static private List<Connection> connectionPool = new ArrayList<Connection>();  
+	static private String jdbcDriver ="com.mysql.jdbc.Driver";
+	static private String jdbcURL = "jdbc:mysql://ec2-52-4-103-140.compute-1.amazonaws.com/mysqltwitter";
 	
 	static private String tableName="q3";
 
@@ -23,8 +27,17 @@ public class Q3 {
 		try {
 			String userId = paras.get("userid").getFirst();
 			long id = Long.parseLong(userId);
-			String response = queryMysql(id).replace('_', '\n');
-            return response;
+
+
+			String cachedResult = Cache.get(String.valueOf(id));
+			if (cachedResult != null){
+				return cachedResult;
+			}else{
+				String response = queryMysql(id).replace('_', '\n');
+				Cache.set(String.valueOf(id),response);
+	            return response;
+			}
+
 		} catch (Exception e) {
 			System.out.println(e);
 		}

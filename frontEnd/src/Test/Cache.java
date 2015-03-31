@@ -2,18 +2,22 @@ package Test;
 
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 
 public class Cache {
+	static private final int Max_entries = 500;
+	static private LinkedHashMap<String, String> map = new LinkedHashMap<String,String>(Max_entries,0.75f,true){
+		protected boolean removeEldestEntry(Map.Entry eldest) {
+		//automatically removes oldest entry when put and size>1000
+		return size() > Max_entries;
+    }};
 
-	private static final int Max_entries = 500000;
-	static Map<String, String> map = new LinkedHashMap<String,String>(Max_entries,.75F,true);
-
-	public synchronized String get(String key){
+	synchronized static String get(String key){
 		return map.get(key);
 	}
 
-	public synchronized void set(String key, String val){
+	synchronized static void set(String key, String val){
 		map.put(key,val);
 	}
 	

@@ -13,7 +13,7 @@ public class Test {
 	public static void main(final String[] args) {
 		final String teamInfo = getTeamInfo();
 		// Undertow server = Undertow.builder().addHttpListener(80, "0.0.0.0")
-		Undertow server = Undertow.builder().addHttpListener(8080, "0.0.0.0") // For
+		Undertow server = Undertow.builder().addHttpListener(80, "0.0.0.0") // For
 																				// local
 																				// machine
 				.setHandler(new HttpHandler() {

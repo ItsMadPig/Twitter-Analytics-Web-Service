@@ -32,8 +32,18 @@ public class Q2 {
 
 			String tweetTime = paras.get("tweet_time").getFirst();
 
-			String response = getMessage(userId+"_"+tweetTime);
-            return response;
+			String fullStr = userId+"_"+tweetTime;
+
+			String cachedResult = Cache.get(fullStr);
+
+			if (cachedResult != null){
+				return cachedResult;
+			}else{
+				String response = getMessage(fullStr);
+				Cache.set(fullStr,response);
+	            return response;
+			}
+
 		} catch (Exception e) {
 			System.out.println(e);
 		}
