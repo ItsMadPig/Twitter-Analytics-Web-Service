@@ -46,7 +46,7 @@ public class Q4 {
     	Connection con = null;
         try {
         	con = MysqlConnection.getConnection();
-        	PreparedStatement pstmt = con.prepareStatement("SELECT response FROM " + tableName + " WHERE  hashtag=? and tweetdate>=? and tweetdate<=?");
+        	PreparedStatement pstmt = con.prepareStatement("SELECT response FROM " + tableName + " WHERE  hashtag=? and tweetdate>=? and tweetdate<=? order by tweetdate");
         	pstmt.setString(1,hashtag);
         	pstmt.setDate(2, startDate);
         	pstmt.setDate(3, endDate);
