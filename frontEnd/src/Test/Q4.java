@@ -24,8 +24,18 @@ public class Q4 {
 			Date startDate = Date.valueOf(start);
 			Date endDate =Date.valueOf(end);
 		       //System.out.println(start);	
-			String response = queryMysql(hashtag, startDate, endDate).replace(';', '\n');
-            return response;
+
+			String fullStr = hashtag+start+end;
+
+			String cachedResult = Cache.get(fullStr);
+			if (cachedResult != null){
+				return cachedResult;
+			}else{
+				String response = queryMysql(hashtag, startDate, endDate).replace(';', '\n');
+				Cache.set(fullStr,response);
+	            return response;
+			}
+
 		} catch (Exception e) {
 			System.out.println(e);
 		}
