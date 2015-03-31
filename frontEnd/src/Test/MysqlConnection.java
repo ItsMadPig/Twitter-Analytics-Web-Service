@@ -33,7 +33,15 @@ public class MysqlConnection {
 	
 	synchronized static  void releaseConnection(Connection con) {
 		synchronized (connectionPool) {
-		connectionPool.add(con);
+			if (connectionPool.size() > 9){
+				try{
+					con.close();
+				}catch(Exception e){
+					
+				}
+			}else{
+				connectionPool.add(con);
+			}
 		}
 	}
 
