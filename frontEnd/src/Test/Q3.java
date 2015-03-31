@@ -15,7 +15,7 @@ import java.util.Map;
 public class Q3 {
 	static private List<Connection> connectionPool = new ArrayList<Connection>();  
 	static private String jdbcDriver ="com.mysql.jdbc.Driver";
-	static private String jdbcURL = "jdbc:mysql://localhost/mysqltwitter";
+	static private String jdbcURL = "jdbc:mysql://ec2-52-4-103-140.compute-1.amazonaws.com/mysqltwitter";
 	static private String tableName="q3";
 
 	private synchronized static  Connection getConnection() throws Exception {
