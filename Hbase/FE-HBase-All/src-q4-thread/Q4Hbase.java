@@ -43,19 +43,19 @@ public class Q4Hbase {
 	static final byte[] family = Bytes.toBytes("f");
 		//Go to find hbase-site.xml in class path
 	static	Configuration config = HBaseConfiguration.create();
-	static HConnection connection = null;
+	//static HConnection connection = null;
 
-	static HTable table = null;
+	//static HTable table = null;
 	static {
-		try {
+		//try {
 			config.set("hbase.zookeeper.quorum", "ip-172-31-58-171.ec2.internal");
-			ExecutorService pool = Executors.newFixedThreadPool(100);
+			//ExecutorService pool = Executors.newFixedThreadPool(100);
 			//connection = HConnectionManager.createConnection(config,  pool); 
-			connection = HConnectionManager.getConnection(config); 
-			table = new HTable(tableName, connection,  pool);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+			//connection = HConnectionManager.getConnection(config,pool); 
+			//table = new HTable(tableName, connection,  pool);
+		//} catch (IOException e) {
+		//	e.printStackTrace();
+		//}
 	}
     protected void processRequest(HttpServerExchange exchange) {
        //String request = exchange.getRequestURL();
@@ -95,12 +95,13 @@ public class Q4Hbase {
 
 	private String getMessageFromHbase(String tag, String start, String end) {
 		//HTable table = null;
-		//HConnection connection = HbaseConnPool.getConnection(config);
+		HconnObject connObject = HbaseConnPool.getConnection(config);
+		HConnection connection = connObject.getConn();
 		String re = "";
 		List<String> lre = new ArrayList<String>();
        		 try {
         	//= HConnectionManager.getConnection(config);
-        		//HTable table = new HTable(tableName,  connection);
+        		HTable table = new HTable(tableName,  connection);
 		//	HTableInterface table = connection.getTable(tableName);
 			
 			Get get = new Get(Bytes.toBytes(tag));
@@ -136,9 +137,9 @@ public class Q4Hbase {
 			table.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} //finally {
-		//	HbaseConnPool.releaseConnection(connection);
-		//}
+		} finally {
+			HbaseConnPool.releaseConnection(connObject);
+		}
            	return re;
 	/*	} catch (IOException e) {
 			e.printStackTrace();
