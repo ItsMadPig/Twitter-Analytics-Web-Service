@@ -14,11 +14,19 @@ public class Cache {
     }};
 
 	synchronized static String get(String key){
-		return map.get(key);
+		try{
+			return map.get(key);
+		}catch(Exception e) {
+
+		}
 	}
 
 	synchronized static void set(String key, String val){
-		map.put(key,val);
+		try{
+			map.put(key,val);
+		}catch (Exception e) {
+
+		}
 	}
 	
 
