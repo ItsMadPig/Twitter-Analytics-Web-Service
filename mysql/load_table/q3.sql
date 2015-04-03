@@ -4,12 +4,12 @@ DROP TABLE IF EXISTS `q3`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `q3` 
   (
-  `x` INT UNSIGNED NOT NULL primary key,
+  `x` INT UNSIGNED NOT NULL,
   `y` LONGTEXT  NOT NULL
 )  CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
-LOAD DATA LOCAL  INFILE '/mnt/tmp/q3data' INTO TABLE q3 FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+LOAD DATA LOCAL  INFILE '/Users/Scarlett/Documents/workspace/Q3ETL/dataTobeLoad' INTO TABLE q3 FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
 
 

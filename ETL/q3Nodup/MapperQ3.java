@@ -20,14 +20,15 @@ public class MapperQ3 {
 				if (!json.trim().equals("")) {
 					JsonObject inputJsonOject = new Gson().fromJson(json,
 							JsonObject.class);
+					String tweetId = inputJsonOject.get("id_str").getAsString();
 					String userId = inputJsonOject.get("user")
 							.getAsJsonObject().get("id_str").getAsString();
 					JsonElement retweet = inputJsonOject.get("retweeted_status"); //Returns: the member matching the name. Null if no such member exists.
 					if (retweet!=null) {
 						String retweetId = retweet.getAsJsonObject().get("user")
 								.getAsJsonObject().get("id_str").getAsString();
-						System.out.println(userId+"\t"+"-"+retweetId);
-						System.out.println(retweetId+"\t"+"+"+userId);
+						System.out.println(userId+"_"+tweetId+"\t"+"-"+retweetId);
+						System.out.println(retweetId+"_"+tweetId+"\t"+"+"+userId);
 					}
 				}
 			}
