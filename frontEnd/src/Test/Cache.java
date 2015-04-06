@@ -17,7 +17,7 @@ public class Cache {
 		try{
 			return map.get(key);
 		}catch(Exception e) {
-
+			return "";
 		}
 	}
 
