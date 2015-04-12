@@ -9,7 +9,7 @@ import java.util.List;
 public class MysqlConnection {
 	static private List<Connection> connectionPool = new ArrayList<Connection>();  
 	static private String jdbcDriver ="com.mysql.jdbc.Driver";
-	static private String jdbcURL = "jdbc:mysql://ec2-52-4-192-136.compute-1.amazonaws.com/mysqltwitter";
+	static private String jdbcURL = "jdbc:mysql:///mysqltwitter";
 	synchronized static  Connection getConnection() throws Exception {
 		synchronized (connectionPool) {
 		if (connectionPool.size() > 0) {
