@@ -8,7 +8,7 @@ CREATE TABLE `q5`
   `tweetdate` DATE NOT NULL,	
   `count` INT UNSIGNED NOT NULL,
   `friends` INT  NOT NULL,
-  `followers` INT UNSIGNED NOT NULL
+  `followers` INT NOT NULL
 )  CHARACTER SET latin1 COLLATE latin1_general_cs;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
