@@ -4,11 +4,12 @@ DROP TABLE IF EXISTS `q6`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `q6` 
   (
-  	`userid` INT UNSIGNED  primary key,
-  `number` INT NOT NULL
+  `id` INT NOT NULL AUTO_INCREMENT primary key,
+  `userid` INT UNSIGNED,
+  `number` INT UNSIGNED NOT NULL
 )  CHARACTER SET latin1 COLLATE latin1_general_cs;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
-LOAD DATA LOCAL  INFILE '/Users/Scarlett/Desktop/eBusiness/15619/619Project/tobeLoadToQ6' INTO TABLE q6 FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+LOAD DATA LOCAL  INFILE '/mnt/tmp/q6-final-partial' INTO TABLE q6 FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
 
