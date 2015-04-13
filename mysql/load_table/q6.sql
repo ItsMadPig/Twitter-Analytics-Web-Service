@@ -4,9 +4,9 @@ DROP TABLE IF EXISTS `q6`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `q6` 
   (
-  `id` INT NOT NULL AUTO_INCREMENT primary key,
   `userid` INT UNSIGNED,
-  `number` INT UNSIGNED NOT NULL
+  `totalcount` INT UNSIGNED NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT primary key
 )  CHARACTER SET latin1 COLLATE latin1_general_cs;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
