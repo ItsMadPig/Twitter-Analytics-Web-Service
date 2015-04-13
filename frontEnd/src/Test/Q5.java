@@ -8,11 +8,39 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Deque;
 import java.util.Map;
 
 public class Q5 {
 	static private String tableName="q5";
+	static class Pair implements Comparable<Pair>{
+		String userid;
+		long score;
+		Pair(String userid, long score) {
+			this.userid = userid;
+			this.score = score;
+		}
+		@Override
+		public int compareTo(Pair that) {
+			if (that.score > this.score) {
+				return 1;
+			}
+			else if (that.score <this.score) {
+				return -1;
+			
+			}
+			else {
+				long thisid = Long.parseLong(this.userid);
+				long thatid = Long.parseLong(that.userid);
+				if (thisid < thatid) return -1;
+				else if (thisid >thatid) return 1;
+			}
+			return 0;
+		}
+	}
 	public static String processRequest(HttpServerExchange exchange) {
 		//q5?userlist=12,16,18&start=2010-01-01&end=2014-12-31
 		Map<String, Deque<String>> paras = exchange.getQueryParameters();
@@ -27,9 +55,15 @@ public class Q5 {
 			Date endDate =Date.valueOf(end);
 		       
 			StringBuffer response = new StringBuffer();
+			ArrayList<Pair> list = new ArrayList<Pair>();
 			for (String userid: userlist) {
 				long score = queryMysql(userid, startDate, endDate);
-				response.append(userid+","+score+"\n");
+				list.add(new Pair(userid,score));
+				
+			}
+			Collections.sort(list);
+			for (Pair pair: list) {
+				response.append(pair.userid+","+pair.score+"\n");
 			}
 
 		    return response.toString();
@@ -50,16 +84,16 @@ public class Q5 {
         	pstmt.setLong(1,Long.parseLong(userid));
         	pstmt.setDate(2, startDate);
         	pstmt.setDate(3, endDate);
-        	int maxFriends  = 0;
-        	int maxFollowers = 0;
+        	long maxFriends  = 0;
+        	long maxFollowers = 0;
         	ResultSet rs = pstmt.executeQuery();
         	
         	StringBuffer ans=new StringBuffer();
         	
             while (rs.next()) {
             	score +=rs.getInt("count");
-            	int friends = rs.getInt("friends") ;
-            	int followers = rs.getInt("followers");
+            	long friends = rs.getInt("friends") ;
+            	long followers = rs.getInt("followers");
             	maxFriends = maxFriends > friends ? maxFriends: friends;
             	maxFollowers = maxFollowers > followers ? maxFollowers: followers;
               
