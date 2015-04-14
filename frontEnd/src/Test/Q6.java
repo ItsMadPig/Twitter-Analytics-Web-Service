@@ -24,7 +24,7 @@ public class Q6 {
 			long mNum = Long.parseLong(m)-1;
 			if (mNum <0) mNum =0;
 			mNum = query(mNum);
-			String response = String.valueOf(nNum - mNum);
+			String response = String.valueOf(nNum - mNum)+"\n";
 			
 		
 		    return response;
@@ -41,7 +41,7 @@ public class Q6 {
     	long score =0;
         try {
         	con = MysqlConnection.getConnection();
-        	PreparedStatement pstmt = con.prepareStatement("select totalcount from q6 where q6.userid = (select max(userid) from q6 where userid<?)");
+        	PreparedStatement pstmt = con.prepareStatement("select totalcount from q6 where q6.userid = (select max(userid) from q6 where userid<=?)");
         	pstmt.setLong(1,userid);
         	
         	
