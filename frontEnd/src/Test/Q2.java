@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.TimeZone;
 
 public class Q2 {
-	static private String tableName="twitter";
+	static private String tableName="q2";
 
 
 	protected static String processRequest(HttpServerExchange exchange) {
