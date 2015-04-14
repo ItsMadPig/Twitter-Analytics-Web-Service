@@ -80,22 +80,18 @@ public class Q5 {
     	long score =0;
         try {
         	con = MysqlConnection.getConnection();
-        	PreparedStatement pstmt = con.prepareStatement("SELECT * FROM " + tableName + " WHERE  userid=? and tweetdate>=? and tweetdate<=?");
+        	PreparedStatement pstmt = con.prepareStatement("SELECT sum(count)+3*max(friends)+5*max(followers) FROM " + tableName + " WHERE  userid=? and tweetdate>=? and tweetdate<=?");
         	pstmt.setLong(1,Long.parseLong(userid));
         	pstmt.setDate(2, startDate);
         	pstmt.setDate(3, endDate);
-        	long maxFriends  = 0;
-        	long maxFollowers = 0;
+
         	ResultSet rs = pstmt.executeQuery();
         	
-        	StringBuffer ans=new StringBuffer();
+        
         	
-            while (rs.next()) {
-            	score +=rs.getInt("count");
-            	long friends = rs.getInt("friends") ;
-            	long followers = rs.getInt("followers");
-            	maxFriends = maxFriends > friends ? maxFriends: friends;
-            	maxFollowers = maxFollowers > followers ? maxFollowers: followers;
+            if (rs.next()) {
+            	score =rs.getLong(1);
+      
               
             }
         	
@@ -103,7 +99,7 @@ public class Q5 {
         	rs.close();
         	pstmt.close();
         	MysqlConnection.releaseConnection(con);
-        	 return score+3*maxFriends+5*maxFollowers;
+        	 return score;
             
         } catch (Exception e) {
             try { if (con != null) con.close(); } catch (SQLException e2) { /* ignore */ }
