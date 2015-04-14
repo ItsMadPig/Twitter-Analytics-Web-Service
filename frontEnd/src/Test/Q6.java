@@ -41,7 +41,7 @@ public class Q6 {
     	long score =0;
         try {
         	con = MysqlConnection.getConnection();
-        	PreparedStatement pstmt = con.prepareStatement("SELECT number FROM " + tableName + " WHERE  userid =?");
+        	PreparedStatement pstmt = con.prepareStatement("select number from q6 where q6.userid = (select max(userid) from q6 where userid<?)");
         	pstmt.setLong(1,userid);
         	
         	
@@ -49,7 +49,7 @@ public class Q6 {
         	
         	
             if (rs.next()) {
-            	score =rs.getInt("number");
+            	score =rs.getLong("number");
             	
               
             }
