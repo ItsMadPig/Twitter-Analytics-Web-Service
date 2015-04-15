@@ -20,11 +20,11 @@ public class Q6 {
 			String m= paras.get("m").getFirst();
 			String n = paras.get("n").getFirst();
 			
-			long nNum = query(Long.parseLong(n));
+			long nNum = Long.parseLong(n);
 			long mNum = Long.parseLong(m)-1;
 			if (mNum <0) mNum =0;
-			mNum = query(mNum);
-			String response = String.valueOf(nNum - mNum)+"\n";
+			long result = query(mNum,nNum);
+			String response = String.valueOf(result)+"\n";
 			
 		
 		    return response;
@@ -36,29 +36,29 @@ public class Q6 {
 		return null;
 	}
 	
-	private static long query(long userid) {
+	private static long query(long userid1,long userid2) {
     	Connection con = null;
-    	long score =0;
+    	long score1 =0;
+    	long score2 = 0;
         try {
         	con = MysqlConnection.getConnection();
-        	PreparedStatement pstmt = con.prepareStatement("select totalcount from q6 where q6.userid = (select max(userid) from q6 where userid<=?)");
-        	pstmt.setLong(1,userid);
+        	PreparedStatement pstmt1 = con.prepareStatement("select totalcount from q6 where q6.userid = (select max(userid) from q6 where userid<=?)");
+        	pstmt.setLong(1,userid1);
+        	ResultSet rs1 = pstmt.executeQuery();
         	
+        	PreparedStatement pstmt2 = con.prepareStatement("select totalcount from q6 where q6.userid = (select max(userid) from q6 where userid<=?)");
+        	pstmt.setLong(1,userid2);
+        	ResultSet rs2 = pstmt.executeQuery();
         	
-        	ResultSet rs = pstmt.executeQuery();
+        	score1 =rs1.getLong(1);
+        	score2 = rs2.getLong(1);
         	
-        	
-            if (rs.next()) {
-            	score =rs.getLong(1);
-            	
-              
-            }
-        	
-        	
-        	rs.close();
-        	pstmt.close();
+        	rs1.close();
+        	pstmt1.close();
+        	rs2.close();
+        	pstmt2.close();
         	MysqlConnection.releaseConnection(con);
-        	 return score;
+        	 return score2 - score1;
             
         } catch (Exception e) {
             try { if (con != null) con.close(); } catch (SQLException e2) { /* ignore */ }
