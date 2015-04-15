@@ -56,12 +56,8 @@ public class Q5 {
 			Date endDate =Date.valueOf(end);
 		       
 			StringBuffer response = new StringBuffer();
-			ArrayList<Pair> list = new ArrayList<Pair>();
-			ArrayList<Long> scorelist = queryQ5(userlistS, startDate, endDate);
-			//System.out.println(scorelist.size() +" "+userlist.length);
-			for (int i=0; i<userlist.length && i<scorelist.size(); i++) {
-				list.add(new Pair(userlist[i],scorelist.get(i)));
-			}
+			ArrayList<Pair> list = queryQ5(userlistS, startDate, endDate);
+
 			Collections.sort(list);
 			for (Pair pair: list) {
 				response.append(pair.userid+","+pair.score+"\n");
@@ -76,7 +72,7 @@ public class Q5 {
 		return null;
 	}
 	
-	private static ArrayList<Long> queryQ5(String userlistS, Date startDate,
+	private static ArrayList<Pair> queryQ5(String userlistS, Date startDate,
 			Date endDate) {
 		Connection con = null;
 		
@@ -85,7 +81,7 @@ public class Q5 {
 		try {
         	con =MysqlConnection.getConnection();
         	
-           	PreparedStatement pstmt = con.prepareStatement("SELECT sum(count)+3*max(friends)+5*max(followers) FROM q5 WHERE   tweetdate between ? and ? and userid in ("+userlistS+") group by userid" );
+           	PreparedStatement pstmt = con.prepareStatement("SELECT userid,  sum(count)+3*max(friends)+5*max(followers) FROM q5new WHERE userid in ("+userlistS+") and tweetdate between ? and ? group by userid" );
         	
         	pstmt.setDate(1, startDate);
         	pstmt.setDate(2, endDate);
@@ -94,9 +90,10 @@ public class Q5 {
 
         	ResultSet rs = pstmt.executeQuery();
         	
-        	ArrayList<Long> scorelist = new ArrayList<Long>();
+        	ArrayList<Pair> list = new ArrayList<Pair>();
         	while (rs.next()) {
-        		scorelist.add(rs.getLong(1));
+        		
+        		list.add( new Pair(rs.getString(1),rs.getLong(2)));
         	}
         	
 
@@ -104,7 +101,7 @@ public class Q5 {
         	rs.close();
         	pstmt.close();
         	MysqlConnection.releaseConnection(con);
-        	 return scorelist;
+        	 return list;
             
         } catch (Exception e) {
             try { if (con != null) con.close(); } catch (SQLException e2) { /* ignore */ }
