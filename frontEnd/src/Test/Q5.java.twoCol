@@ -42,11 +42,9 @@ public class Q5 {
 	}
 	public static String processRequest(HttpServerExchange exchange) {
 		//q5?userlist=12,16,18&start=2010-01-01&end=2014-12-31
-		//System.out.println(exchange.getQueryString());
 		Map<String, Deque<String>> paras = exchange.getQueryParameters();
 		try {
-			String userlistS = paras.get("userlist").getFirst();
-			String[] userlist = userlistS.split(",");
+			String[] userlist = paras.get("userlist").getFirst().split(",");
 			
 			String start = paras.get("start").getFirst();
 			String end = paras.get("end").getFirst();
@@ -57,10 +55,9 @@ public class Q5 {
 		       
 			StringBuffer response = new StringBuffer();
 			ArrayList<Pair> list = new ArrayList<Pair>();
-			ArrayList<Long> scorelist = queryQ5(userlistS, startDate, endDate);
-			//System.out.println(scorelist.size() +" "+userlist.length);
-			for (int i=0; i<userlist.length && i<scorelist.size(); i++) {
-				list.add(new Pair(userlist[i],scorelist.get(i)));
+			long[] scorelist = queryQ5(userlist, start, end);
+			for (int i=0; i<userlist.length; i++) {
+				list.add(new Pair(userlist[i],scorelist[i]));
 			}
 			Collections.sort(list);
 			for (Pair pair: list) {
@@ -76,27 +73,27 @@ public class Q5 {
 		return null;
 	}
 	
-	private static ArrayList<Long> queryQ5(String userlistS, Date startDate,
-			Date endDate) {
+	private static long[] queryQ5(String[] userlist, String start,
+			String end) {
 		Connection con = null;
-		
-
+		StringBuffer sb = new StringBuffer();
+		for (String user: userlist) {
+			sb.append("(SELECT sum(count)+3*max(friends)+5*max(followers) FROM q5 WHERE  userid="+user+" and tweetdate>='"+start+"' and tweetdate<='"+end+"'),");
+		}
 		
 		try {
-        	con =MysqlConnection.getConnection();
-        	
-           	PreparedStatement pstmt = con.prepareStatement("SELECT sum(count)+3*max(friends)+5*max(followers) FROM q5 WHERE   tweetdate between ? and ? and userid in ("+userlistS+") group by userid" );
-        	
-        	pstmt.setDate(1, startDate);
-        	pstmt.setDate(2, endDate);
-        	
+        	con = MysqlConnection.getConnection();
+        	PreparedStatement pstmt = con.prepareStatement("select"+sb.substring(0, sb.length()-1)+";");
         	//System.out.println(pstmt.toString());
+     
 
         	ResultSet rs = pstmt.executeQuery();
         	
-        	ArrayList<Long> scorelist = new ArrayList<Long>();
-        	while (rs.next()) {
-        		scorelist.add(rs.getLong(1));
+        	long[] scorelist = new long[userlist.length];
+        	if (rs.next()) {
+        	for (int i=1; i<=userlist.length; i++) {
+        		scorelist[i-1] =rs.getLong(i); 
+        	}
         	}
         	
 
@@ -124,7 +121,7 @@ public class Q5 {
     	Connection con = null;
     	long score =0;
         try {
-        	con =MysqlConnection.getConnection();
+        	con = MysqlConnection.getConnection();
         	PreparedStatement pstmt = con.prepareStatement("SELECT sum(count)+3*max(friends)+5*max(followers) FROM q5 WHERE  userid=? and tweetdate>=? and tweetdate<=?");
         	pstmt.setLong(1,Long.parseLong(userid));
         	pstmt.setDate(2, startDate);
