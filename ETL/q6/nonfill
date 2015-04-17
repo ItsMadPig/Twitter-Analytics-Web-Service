@@ -1,0 +1,14 @@
+#!/bin/bash
+
+
+awk '
+BEGIN{ 
+FS = "\t";
+OFS = "\t";
+sum=0;}
+{
+sum+=$2;
+print $1,sum;
+}
+
+' q6-partial-sorted

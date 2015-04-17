@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+awk '
+BEGIN{ 
+FS = "\t";
+OFS = "\t";
+}
+{
+if ($2 != 0){
+    print $1,$2;
+}
+}
+
+' q6-partial-sorted
