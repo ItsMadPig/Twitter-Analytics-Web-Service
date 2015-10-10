@@ -7,6 +7,7 @@ sudo yum -y install mysql-server
 sudo yum -y install mysql-devel
 cd /etc/yum.repos.d
 sudo wget http://s3tools.org/repo/RHEL_6/s3tools.repo
+sudo yum -y install --enablerepo=epel byobu
 sudo yum -y install s3cmd
 sudo yum -y install libaio-* libaio-* libaio-devel-* libaio-devel-*
 sudo yum -y install java-1.7.0-openjdk-devel
