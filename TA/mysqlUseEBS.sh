@@ -1,5 +1,6 @@
 #!/bin/bash
 main(){
+sudo service mysql stop
 sudo umount /mnt
 sudo mkdir /mnt/etc /mnt/lib /mnt/log
 sudo mv /etc/mysql     /mnt/etc/
@@ -14,5 +15,6 @@ echo -e "/mnt/lib/mysql\t/var/lib/mysql\tnone\tbind" | sudo tee -a /etc/fstab
 sudo mount /var/lib/mysql
 echo -e "/mnt/log/mysql\t/var/log/mysql\tnone\tbind" | sudo tee -a /etc/fstab
 sudo mount /var/log/mysql
+sudo service mysql start
 }
 main
