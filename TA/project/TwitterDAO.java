@@ -12,8 +12,8 @@ import java.util.List;
 public class TwitterDAO {
 	static private List<Connection> connectionPool = new ArrayList<Connection>();  
 	static private String jdbcDriver ="com.mysql.jdbc.Driver";
-	static private String jdbcURL = "jdbc:mysql://localhost/mysqltwitter";
-	static private String tableName="twitter";
+	static private String jdbcURL = "jdbc:mysql://localhost/newdb";
+	static private String tableName="tweets";
 
 	private synchronized static  Connection getConnection() throws Exception {
 		synchronized (connectionPool) {
@@ -41,17 +41,20 @@ public class TwitterDAO {
 		connectionPool.add(con);
 		}
 	}
-	public static List<String> getUserTweets(String userid_time) {
+	public static List<String> getUserTweets(String userid, String created_at) {
     	Connection con = null;
         try {
         	con = getConnection();
-        	PreparedStatement pstmt = con.prepareStatement("SELECT response FROM " + tableName + " WHERE userid_time=?");
-        	pstmt.setString(1,userid_time);
+        	PreparedStatement pstmt = con.prepareStatement("SELECT tweet_text FROM " + tableName + " WHERE userid=? and created_at=?");
+        	pstmt.setString(1,userid);
+		pstmt.setString(2,created_at);
         	ResultSet rs = pstmt.executeQuery();
         	
         	List<String> list = new ArrayList<String>();
             while (rs.next()) {
-            	list.add(rs.getString(1).trim());
+		String temp = rs.getString(1).trim();
+		temp = temp.substring(0,temp.length()-1);
+            	list.add(temp);
             }
         	
         	

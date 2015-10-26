@@ -28,7 +28,7 @@ public class Q2 {
 
 			String tweetTime = paras.get("tweet_time").getFirst();
 
-			String response = getMessage(userId+"_"+tweetTime);
+			String response = getMessage(userId, tweetTime);
             return response;
 		} catch (Exception e) {
 			System.out.println(e);
@@ -41,8 +41,8 @@ public class Q2 {
 	/*
 	 * Get text from Mysql
 	 */
-	private static  String getMessage(String userid_time) {
-		List<String> message = TwitterDAO.getUserTweets(userid_time);
+	private static  String getMessage(String userid, String created_at) {
+		List<String> message = TwitterDAO.getUserTweets(userid, created_at);
 		Collections.sort(message);
 		StringBuilder response=new StringBuilder("");
 		//System.out.println("empty response: "+response+"  size: "+message.size());

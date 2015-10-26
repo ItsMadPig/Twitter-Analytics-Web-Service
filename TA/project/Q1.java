@@ -15,13 +15,12 @@ public class Q1 {
 	/*
 	 * return Y: this will always be a prime positive number
 	 */
-	int getY(String strXY) {
+	BigInteger getY(String strXY) {
 		final String strX = "8271997208960872478735181815578166723519929177896558845922250595511921395049126920528021164569045773";
 		BigInteger x = new BigInteger(strX);
 		BigInteger xy = new BigInteger(strXY);
 		BigInteger y = xy.divide(x);
-		int inty = y.intValue();
-		return inty;
+		return y;
 	}
 
 	/*
@@ -29,12 +28,12 @@ public class Q1 {
 	 * length example: c=URYEXYBJB -> intermediate message i: URYYBJBEX
 	 */
 	String getMessage(String key, String ciphertext) {
-		int y = getY(key);
+		BigInteger y = getY(key);
 
 		char[] messageI = getMessageI(ciphertext);
-
+		BigInteger base = new BigInteger("25");
 		// Get IntermediateKey Z
-		int z = (int)(1 + (y % 25));
+		int z = (1 + (y.mod(base).intValue()));
 		// System.out.println("z is "+z);
 
 		// Convert messageI to messageM
